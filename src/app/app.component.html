@@ -1,0 +1,15 @@
+<div class="page-layout">
+  <!-- Only show TopNav and Sidebar on routes other than 'login' and 'signup' -->
+  <div class="page-layout1">
+  <app-top-nav class="top-nav mobile-only" *ngIf="shouldShowComponents"></app-top-nav>
+
+  </div>
+  <div class="page-layout2">
+  <app-sidebar  *ngIf="shouldShowComponents" class="desktop-only"></app-sidebar>
+  </div> 
+
+  <div class="main-content">
+      <router-outlet></router-outlet> <!-- Routed content goes here -->
+  </div>
+</div>
+

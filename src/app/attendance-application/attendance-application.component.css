@@ -1,0 +1,222 @@
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+ 
+}
+
+.attendance-container {
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  width: 100%;
+ 
+}
+
+.add-attendance-header {
+  background-color: skyblue;
+  padding: 10px;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  margin: 0;
+}
+
+.buttons-container {
+  display: flex;
+  gap: 10px;
+  
+}
+
+.submit-button, .cancel-button {
+  padding: 10px 20px;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-button {
+  background-color: #28a745;
+}
+
+.submit-button:hover {
+  background-color: #218838;
+}
+
+.cancel-button {
+  background-color: #dc3545;
+}
+
+.cancel-button:hover {
+  background-color: #c82333;
+}
+
+.main-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+}
+
+.left-section, .right-section {
+  flex: 1;
+  min-width: 280px; /* Allow for smaller screens */
+  max-width: 100%;
+  padding: 0px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+.form-group1{
+  padding-top: 10px;
+}
+
+.form-control {
+  width: 40%; /* Reduced width for smaller size */
+  padding: 6px; /* Less padding for a compact appearance */
+  font-size: 14px; /* Slightly smaller font size */
+  border: none;
+  border-bottom: 1px solid #000;
+}
+
+.form-control:focus {
+  outline: none;
+  border-bottom: 2px solid #007bff;
+}
+
+.date-range-inline {
+  display: flex;
+  justify-content: space-between;
+  gap: -5px;
+}
+
+.icon-buttons {
+  display: flex;
+  gap: 10px;
+  
+}
+
+.details-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  table-layout: fixed; /* Ensure table is fixed and content doesn't overflow */
+}
+
+.details-table th, .details-table td {
+  border: 1px solid #ddd;
+  text-align: left;
+  padding: 6px 8px;
+  font-size: 10px;
+  word-wrap: break-word; /* Ensure text doesn't overflow */
+}
+
+.details-table th {
+  background-color: #b6e2fb;
+}
+
+@media (max-width: 1500px) {
+  .main-section {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .details-table th, .details-table td {
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  /* Making the table compact for smaller screens */
+  .details-table {
+    width: 100%;
+  }
+
+  .details-table th, .details-table td {
+    min-width: 70px;
+  }
+
+  /* Buttons container adjustment */
+  .buttons-container {
+    flex-direction: column;
+    align-items: flex-start;
+
+  }
+}
+
+@media (max-width: 768px) {
+  /* Adjust for smaller mobile screens */
+  .details-table th, .details-table td {
+    font-size: 8px;
+    padding: 4px;
+  }
+
+  .details-table {
+    font-size: 11px;
+  }
+
+  
+
+  /* Further reduce padding for mobile screens */
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .form-control {
+    font-size: 14px;
+    padding: 6px;
+  }
+
+  .buttons-container {
+    gap: 8px;
+  }
+
+  
+}
+
+@media (max-width: 400px) {
+  .attendance-container {
+    padding: 5px;
+  }
+
+  /* Header section */
+  .add-attendance-header {
+    padding: 15px;
+    margin-bottom: 29px; 
+    margin-top: 66px;
+  }
+
+  /* Main section */
+  .main-section {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .left-section, .right-section {
+    
+    min-width: 100%;
+    padding: 10px;
+  }
+
+  /* Table adjustments for mobile */
+  .details-table th, .details-table td {
+    font-size: 10px;
+    padding: 0px;
+  }
+
+  .form-control {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .buttons-container {
+    flex-direction: row;
+    gap: 8px;
+    
+  }
+}
+

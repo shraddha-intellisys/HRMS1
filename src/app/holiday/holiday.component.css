@@ -1,0 +1,44 @@
+.holiday-wrapper {
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .header {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+  }
+  
+  .month-name {
+    color: #007b83;
+    font-weight: bold;
+    margin-top: 1rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 4px;
+  }
+  
+  .holiday-row {
+    display: flex;
+    align-items: center;
+    padding: 6px 0;
+  }
+  
+  .date-box {
+    background-color: #f965b9;
+    color: #fff;
+    font-weight: bold;
+    padding: 5px 12px;
+    border-radius: 4px;
+    margin-right: 10px;
+    min-width: 80px;
+    text-align: center;
+  }
+  
+  .holiday-name {
+    color: #333;
+  }
+  

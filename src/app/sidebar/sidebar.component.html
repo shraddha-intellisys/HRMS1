@@ -1,0 +1,50 @@
+
+<div class="sidebar">
+    <div class="logo">
+      <h3 class="title">HRMThread</h3>
+    </div>
+    <ul>
+      <!-- Home Section -->
+      <li>
+        <a href="javascript:void(0);" (click)="toggleDropdown('home')">
+          <span>🏠</span> Home
+          <span class="arrow" [ngClass]="{ open: isDropdownOpen.home }">&#9662;</span>
+        </a>
+        <ul *ngIf="isDropdownOpen.home" class="dropdown">
+          <li><a [routerLink]="['/right']" routerLinkActive="active">Home</a></li>
+         
+        </ul>
+      </li>
+  
+      <!-- Profile Section -->
+      <li>
+        <a href="javascript:void(0);" (click)="toggleDropdown('profile')">
+          <span>👤</span> Profile
+          <span class="arrow" [ngClass]="{ open: isDropdownOpen.profile }">&#9662;</span>
+        </a>
+        <ul *ngIf="isDropdownOpen.profile" class="dropdown">
+          <li><a [routerLink]="['/profile']">View Profile</a></li>
+          <li><a [routerLink]="['/profile']">Edit Profile</a></li>
+        </ul>
+      </li>
+  
+      <!-- Other Sections -->
+      <li><a [routerLink]="['/shedule']"><span>🗓️</span> Time & Attendance</a></li>
+      <li><a [routerLink]="['/leaves']"><span>✅</span> Leave</a></li>
+      
+      <li>
+        <a href="javascript:void(0);" (click)="toggleDropdown('payroll')">
+          <span>💰</span> Payroll
+          <span class="arrow" [ngClass]="{ open: isDropdownOpen.payroll }">&#9662;</span>
+        </a>
+        <ul *ngIf="isDropdownOpen.payroll" class="dropdown">
+          <li><a href="#">Payslip</a></li>
+          <li><a href="#">Salary History</a></li>
+        </ul>
+      </li>
+      <li><a href="#"><span>🚪</span> Apply Exit</a></li>
+      <li><a href="#"><span>📊</span> Organisation Chart</a></li>
+      <li><a [routerLink]="['/employee']"><span>✅</span> Employee-Registration</a></li>
+    </ul>
+  </div>
+  

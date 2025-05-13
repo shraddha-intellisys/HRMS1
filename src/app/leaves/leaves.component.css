@@ -1,0 +1,219 @@
+.calendar-panel {
+  max-width: 100%; /* Allow full width */
+  width: 100%;      /* Take full width of parent */
+  margin: 40px auto;
+  padding: 20px;
+  border: 2px solid #feffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  overflow: auto;
+  height: auto;
+}
+
+
+.full-calendar-container {
+  width: 100%;
+  max-width: 1600px;   /* Wider than before */
+  margin: 0 auto;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+
+:host ::ng-deep .fc {
+  font-size: 15px;
+  width: 100%; /* Ensure FullCalendar stretches */
+}
+
+
+:host ::ng-deep .fc-daygrid-day-frame {
+  min-height: 100px; /* Increase if lower section is cut off */
+}
+
+:host ::ng-deep .fc-scrollgrid {
+  border-radius: 8px;
+  overflow: visible;
+}
+
+/* General Layout */
+.commondiv {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.divleft, .divcenter, .divright {
+  background: #fff;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.divleft {
+  flex: 1;
+  min-width: 300px;
+}
+
+.divcenter {
+  flex: 2;
+  min-width: 400px;
+}
+
+.divright {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* Navbar and Heading */
+.navbar, .heading {
+  text-align: center;
+  padding: 1rem;
+  background: #1976d2;
+  color: white;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+/* Calendar Styling */
+.calendar-panel {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.fc {
+  font-size: 14px;
+}
+
+.fc-toolbar-title {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* Circle Chart */
+.circle-chart {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.circular-chart {
+  width: 100%;
+  height: 100%;
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #eee;
+  stroke-width: 3.8;
+}
+
+.circle {
+  fill: none;
+  stroke: #4caf50;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+}
+
+/* Leave Types */
+.leave-type {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: #fafafa;
+}
+
+/* Buttons */
+button.details-btn,
+button.mat-raised-button {
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+/* Attendance Summary */
+.attendance-summary {
+  margin-top: 1rem;
+}
+
+.attendance-box {
+  border-radius: 6px;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  color: #fff;
+}
+
+.attendance-box.present { background: #4caf50; }
+.attendance-box.absent { background: #f44336; }
+.attendance-box.leave { background: #2196f3; }
+.attendance-box.lwp { background: #ff9800; }
+.attendance-box.leave-submit { background: #673ab7; }
+.attendance-box.attendance-submit { background: #009688; }
+.attendance-box.phy { background: #795548; }
+.attendance-box.weo { background: #3f51b5; }
+.attendance-box.reminders { background: #607d8b; }
+.attendance-box.half-day { background: #ffc107; }
+.attendance-box.blocked { background: #9e9e9e; }
+
+/* Holiday Section */
+.upcoming-holidays {
+  margin-top: 2rem;
+}
+
+.view-holidays-link {
+  font-size: 0.9rem;
+  color: #1976d2;
+  margin-left: 8px;
+  text-decoration: underline;
+}
+
+.holiday-list ul {
+  padding-left: 1.2rem;
+}
+
+.holiday-list li {
+  margin-bottom: 4px;
+}
+
+/* Summary Cards */
+.summary-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.card {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  min-width: 100px;
+}
+
+.card span {
+  display: block;
+  font-weight: bold;
+}
+
+.card.all-record { background: #2196f3; }
+.card.submitted { background: #009688; }
+.card.accepted { background: #4caf50; }
+.card.rejected { background: #f44336; }
+.card.cancelled { background: #9e9e9e; }
+.card.new-application { background: #ff9800; }
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+  .commondiv {
+    flex-direction: column;
+  }
+}

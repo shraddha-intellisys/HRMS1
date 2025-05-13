@@ -1,0 +1,72 @@
+/* Reset styles to avoid conflicts */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main container for the page */
+.page-layout {
+  display: flex; /* Flexbox for alignment */
+  flex-direction: row; /* Sidebar and content side by side */
+  height: 100vh; /* Full height */
+}
+
+/* Top navigation bar */
+.top-nav {
+  width: 100%; /* Full width */
+  height: 60px; /* Height of the header */
+  background-color: #333; /* Example background color */
+  color: white; /* Example text color */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Adjust content within the nav bar */
+  position: fixed; /* Fixed at the top */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Ensure it's on top of other content */
+}
+
+/* Sidebar */
+.app-sidebar {
+  width: 15%; /* Adjusted sidebar width (15% of total width) */
+  background-color: #f4f4f4; /* Example background color */
+  height: 100%; /* Full height of the content area */
+  position: fixed; /* Keeps the sidebar fixed on the left */
+  top: 60px; /* Adjust for the height of the top nav */
+  left: 0;
+  z-index: 500; /* Make sure it doesn't overlap other elements */
+}
+
+/* Main content */
+.main-content {
+ 
+  flex: 1; /* Use remaining space */
+  background-color: #ffffff; /* Example background color */
+  height: 100vh; /* Full height */
+  padding: 20px; /* Optional padding for content */
+  overflow-y: auto; /* Enable scrolling if content overflows */
+}
+
+/* Mobile layout adjustments */
+.desktop-only {
+  display: block;
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media screen and (max-width: 769px) {
+  .desktop-only {
+    display: none; /* Hide sidebar on mobile */
+  }
+
+  .mobile-only {
+    display: block; /* Show mobile navigation */
+  }
+
+  .main-content {
+    margin-left: 0; /* Remove margin when sidebar is hidden */
+  }
+}

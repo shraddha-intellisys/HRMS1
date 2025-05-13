@@ -1,0 +1,314 @@
+/* Container for the three panels */
+.commondiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 10px;
+  flex-wrap: nowrap;
+}
+
+/* Left Panel */
+.divleft {
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+
+/* Center Panel (Calendar) */
+.divcenter {
+  flex: 0 0 50%;
+  max-width: 50%;
+  margin-right: 30px; /* Adds spacing to the right of the calendar */
+}
+
+/* Right Panel */
+.divright {
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+
+/* Calendar Container */
+.calendar-container {
+  background-color: #f4f6f8;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: darkorange
+}
+
+/* Calendar Box */
+.calendar-box {
+  background-color: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: darkorange;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .commondiv {
+    flex-direction: column;
+  }
+
+  .divleft,
+  .divcenter,
+  .divright {
+    max-width: 100%;
+    flex: 0 0 100%;
+    margin-right: 0;
+  }
+}
+
+.attendance-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: var(--background-black);
+  padding: 20px;
+  border-radius: 10px;
+  }
+  
+  .attendance-row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  }
+  
+  .attendance-box {
+  flex: 1 1 45%;
+  background-color: var(--box-black);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px var(--shadow-orange);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+  }
+  
+  .attendance-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px var(--accent-orange);
+  }
+  
+  .attendance-details {
+  color: var(--text-light);
+  font-size: 16px;
+  font-weight: 500;
+  }
+  
+  .status-count {
+  color: var(--primary-orange);
+  font-weight: bold;
+  font-size: 18px;
+  margin: 0;
+  }
+  
+  .attendance-box.present {
+  border-left: 4px solid #28a745;
+  }
+  .attendance-box.absent {
+  border-left: 4px solid #dc3545;
+  }
+  .attendance-box.leave {
+  border-left: 4px solid #ffc107;
+  }
+  .attendance-box.lwp {
+  border-left: 4px solid #17a2b8;
+  }
+  .attendance-box.leave-submit {
+  border-left: 4px solid #fd7e14;
+  }
+  .attendance-box.attendance-submit {
+  border-left: 4px solid #20c997;
+  }
+  .attendance-box.phy {
+  border-left: 4px solid #6c757d;
+  }
+  .attendance-box.weo {
+  border-left: 4px solid #6f42c1;
+  }
+  .attendance-box.reminders {
+  border-left: 4px solid #007bff;
+  }
+  .attendance-box.half-day {
+  border-left: 4px solid #6610f2;
+  }
+  .attendance-box.blocked {
+  border-left: 4px solid #343a40;
+  }
+
+  :root {
+  --primary-orange: #FF8C00;
+  --accent-orange: #FFA500;
+  --background-black: #121212;
+  --box-black: #1f1f1f;
+  --text-light: #ffffff;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-black);
+  color: var(--text-light);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Container Layout */
+.commondiv {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Left, Center, Right Panels */
+.divleft, .divcenter, .divright {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--box-black);
+  box-shadow: 0 0 10px rgba(69, 242, 6, 0.3);
+}
+
+.divleft { flex: 0 0 25%; max-width: 25%; }
+.divcenter { flex: 0 0 50%; max-width: 50%; margin-right: 30px; }
+.divright { flex: 0 0 25%; max-width: 25%; }
+
+/* Header and Time */
+h3, h4, h2, p {
+  color: var(--primary-orange);
+}
+
+/* Buttons */
+button {
+  background-color: var(--primary-orange);
+  color: var(--text-light);
+  padding: 10px 15px;
+  margin: 5px 5px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--accent-orange);
+}
+
+/* Calendar Box */
+.calendar-container, .calendar-box {
+  background-color: var(--box-black);
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(44, 222, 8, 0.4);
+}
+
+/* Attendance Summary */
+.attendance-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.attendance-row {
+  display: flex;
+  gap: 10px;
+}
+
+.attendance-box {
+  flex: 1;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: var(--background-black);
+  box-shadow: 0 4px 8px rgba(255, 140, 0, 0.3);
+  color: var(--text-light);
+  transition: transform 0.3s ease;
+}
+
+.attendance-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(255, 165, 0, 0.5);
+}
+
+.status-count {
+  color: var(--primary-orange);
+  font-size: 16px;
+  font-weight: bold;
+}
+/* Panel Styling */
+.divleft {
+  /* background-color: #1a1a1a; */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+  color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.header h3,
+.roster-section h4 {
+  color: #ff8c00;
+  margin-bottom: 10px;
+}
+
+.time-display p {
+  font-size: 14px;
+  margin: 2px 0;
+  color: black;
+}
+
+/* Button Styling */
+.buttons {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.buttons button {
+  background-color: #ff8c00;
+  color: #fff;
+  padding: 10px 14px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(255, 140, 0, 0.4);
+}
+
+.buttons button:hover {
+  background-color: #ffa500;
+  transform: translateY(-2px);
+}
+
+.marked-times p {
+  font-size: 13px;
+  margin-top: 5px;
+  color:black;
+}
+
+.roster-section {
+  margin-top: 20px;
+}
+
+.mat-form-field {
+  width: 100%;
+  background-color: #2b2b2b;
+  border-radius: 6px;
+}
+
+.mat-form-field .mat-label {
+  color: #ffa500;
+}
+
+input[matInput] {
+  color: #ffffff;
+}
+
+/* Heading above panel */
+.heading h4 {
+  color: #ff8c00;
+  text-align: center;
+  margin: 20px 0;
+  font-size: 22px;
+  text-shadow: 1px 1px 4px rgba(255, 140, 0, 0.5);
+}
+

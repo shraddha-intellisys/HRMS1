@@ -1,0 +1,272 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+
+/* General Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f9f9f9;
+    line-height: 1.6;
+}
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: black;
+    color: white;
+    height: 50px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .logo {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Employee Container */
+.employee-container {
+   
+    padding: 20px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 900px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Employee Header */
+.employee-header {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* Employee Image */
+.employee-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.employee-image img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Employee Details */
+.employee-details {
+    flex: 1;
+}
+
+.headline span {
+    margin-left: 45%;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.flex-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.flex-item {
+    flex: 1 1 200px;
+}
+
+.detail label {
+    font-weight: bold;
+    color: #555;
+}
+
+.detail span {
+    margin-left: 5px;
+    color: #666;
+}
+
+/* Employee Buttons */
+.employee-m {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 40px !important; /* Increased for better spacing */
+}
+
+
+.empbutton {
+    margin-right: 20px;
+    gap:20px;
+}
+
+.empbutton .letter {
+    margin-right: 0; /* Ensures the second button does not have additional space on the right */
+}
+
+button {
+    margin-left: 19px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #27282a;
+}
+
+/* Cards */
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px;
+    overflow-x: auto;
+}
+
+.card {
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, white, white);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, white, rgb(238, 238, 238));
+}
+
+.card-header {
+    background-color: darkorange;
+    font-size: 1.2rem;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+}
+
+.card-body {
+    padding: 10px;
+    color: black;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    color: black;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: black;
+}
+
+.card-text strong {
+    color: black;
+}
+
+/* Additional Section Styling */
+.container2 p {
+    font-weight: bold;
+    font-size: 1.1rem;
+    height: 50px;
+    width: 100%;
+    background-color: whitesmoke;
+    padding: 10px;
+    color: rgb(12, 12, 11);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .employee-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .headline span {
+        margin-left: 2%;
+    }
+
+    .employee-image img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 90%;
+    }
+
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .employee-header {
+        margin-top: 5px;
+    }
+
+    .employee-image img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .card {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .card-body {
+        padding: 8px;
+    }
+
+    .card-title {
+        font-size: 1rem;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+    }
+
+    .navbar .logo {
+        font-size: 1.1rem;
+    }
+}

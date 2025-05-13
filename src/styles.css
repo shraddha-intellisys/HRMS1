@@ -1,0 +1,141 @@
+/* FullCalendar Styles */
+/* @import '../node_modules/@fullcalendar/core/main.css';
+@import '../node_modules/@fullcalendar/daygrid/main.css';
+@import '../node_modules/@fullcalendar/list/main.css'; */
+/* Custom styles for FullCalendar */
+.calendar-panel {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 50%;
+  width: 75%;
+  margin-left: -200px;
+  margin-top: 10px;
+  z-index: 0;
+}
+
+/* Customize calendar toolbar header */
+.fc-toolbar h2 {
+  font-size: 0.1rem;
+  color: #333;
+}
+
+.fc-toolbar .fc-button-group {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.fc-toolbar .fc-button {
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 5px;
+  font-size: 0.80rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.fc-toolbar .fc-button:hover {
+  background-color: #0056b3;
+}
+
+.fc-toolbar .fc-button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+/* Button styling for specific actions */
+.fc-toolbar .fc-button.fc-prev-year-button,
+.fc-toolbar .fc-button.fc-next-year-button {
+  background-color: #5a6268;
+  color: white;
+  margin-left: 20px;
+}
+
+.fc-toolbar .fc-button.fc-prev-year-button:hover,
+.fc-toolbar .fc-button.fc-next-year-button:hover {
+  background-color: #3d474f;
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 1200px) {
+  .calendar-panel {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+
+  .fc-toolbar .fc-button {
+    font-size: 0.7rem;
+    padding: 4px 6px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .fc-toolbar .fc-button-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .calendar-panel {
+    padding: 10px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .fc-toolbar .fc-button {
+    font-size: 0.6rem;
+    padding: 2px 3px;
+  }
+
+  .calendar-panel {
+    margin-right: 0;
+    margin-top: 0;
+    padding: 8px;
+  }
+}
+
+/* FullCalendar Customizations */
+.fc-daygrid-event-dot {
+  border: none;
+}
+
+.fc-day {
+  position: relative;
+}
+
+.fc-day.fc-day-just-in {
+  background-color: red !important;
+  color: white; /* Optional: Ensure the text is visible */
+}
+
+.fc-day.fc-day-just-out {
+  background-color: green !important;
+  color: white; /* Optional: Ensure the text is visible */
+}
+
+.fc-day.marked-in {
+  background-color: red !important;
+  color: white; /* Text white for visibility */
+}
+
+.fc-day.marked-out {
+  background-color: green !important;
+  color: white; /* Text white for visibility */
+}
+
+/* Optional: Hover effect for calendar cells */
+.fc-day:hover {
+  filter: brightness(0.95);
+}
+
+.fc-event {
+  background: transparent !important;  /* ✅ Remove background */
+  border: none !important;
+  padding: 2px;
+}

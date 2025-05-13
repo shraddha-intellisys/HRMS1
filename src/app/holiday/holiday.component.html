@@ -1,0 +1,31 @@
+<div class="container">
+    <!-- Navbar -->
+    <div class="navbar">
+      <h2>Intellisys IT Solutions Private Limited</h2>
+    </div>
+  
+    <div class="heading">
+      <h4>Holiday List</h4>
+    </div>
+  
+    <!-- Holiday List Display -->
+    <div class="holiday-wrapper">
+      <div *ngFor="let month of groupedHolidays | keyvalue">
+        <h4 class="month-name">{{ month.key }}</h4>
+        <div *ngFor="let holiday of month.value" class="holiday-row">
+          <div class="date-box">
+            <span class="date">{{ holiday.date | date: 'MMM dd' }}</span>
+          </div>
+          <div class="holiday-name">{{ holiday.name }}</div>
+        </div>
+      </div>
+    </div>
+
+    
+    
+  
+    
+  
+    
+    
+  

@@ -1,0 +1,704 @@
+
+*
+{
+  font-family: Arial, sans-serif;
+}
+
+/* Main Container */
+.company-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 20px;
+  background-color: #f0f0f0; /* Light gray background */
+  border: 1px solid #ccc; /* Optional border */
+  border-radius: 4px; /* Optional rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  height: 49px; /* Adjust height as needed */
+ background-color: black;
+}
+
+/* Centered Company Name */
+.company-name {
+  position: fixed;
+  left: 56%;
+  transform: translateX(-50%);
+  font-size: 19px;
+  font-weight: bold;
+  color: #e3d4d4;
+  font-family: Arial, sans-serif;
+}
+
+/* Right Content Container */
+.right-content {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between employee details, photo, and notification */
+  margin-left: auto;
+  background-color: white;
+  
+}
+
+/* Employee Details Flex */
+.employee-details {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+/* Employee Name and ID Styling */
+.employee-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #100f0f;
+  
+}
+
+.employee-id {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Employee Photo */
+.employee-photo {
+  height: 40px; /* Adjust size as needed */
+  width: 40px;
+  border-radius: 50%; /* Makes it circular */
+  object-fit: cover; /* Ensures the image fits within the circle */
+}
+
+/* Notification Icon */
+.notification-icon {
+  height: 29px;
+  width: 29px;
+  cursor: pointer; /* Changes to pointer on hover */
+}
+
+
+/* Reset body styles */
+.body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 6px;
+  width: 99%;
+
+}
+
+/* Welcome Section */
+.welcome-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 20px; /* Add internal spacing */
+  margin: 20px 0; /* Add top and bottom gap */
+  background: #fffcfc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+
+.welcome-text {
+  text-align: left; /* Aligns all text to the left */
+}
+
+.employee-info h2 {
+  margin: 0;
+  font-size: 1.8rem; /* Adjust as needed */
+  color: #333;
+}
+
+.welcome-message {
+  margin-left:26%;
+  margin-top: -35px;
+  font-size: 16px; /* Slightly smaller font size than heading */
+  color: #666;
+}
+
+.makeflex
+{
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.employee-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.employee-img {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.welcome-text h2 {
+  margin: 0;
+  font-size: 38px;
+  color: #333;
+}
+
+.welcome-text p {
+  margin-left: 104px;
+  margin-top: -12px; 
+  font-size: 15px;
+  color: #666;
+  gap: 6px;
+}
+
+.officelogo {
+  flex-shrink: 0;
+  
+}
+
+.officelogo img {
+ 
+    width: 315px; /* Adjust the logo size here */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 4px; /* Optional: Add rounded corners if needed */
+    align-items: center;
+}
+
+/* Adjust spacing for below containers */
+.container-below {
+  margin-top: 20px; /* Sufficient space between sections */
+}
+
+
+
+.content-time
+{
+  height: 108px;
+  background-image: url('/assets/blue (2).jpg');
+  border: 1px solid #dee2e6;
+  padding: 60px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.content-time h4{
+  color: white;
+  font-size: 25px;
+  margin:0;
+}
+
+.content-time p{
+   font-size: 20px;
+   color: white;
+}
+
+
+
+/* Content Section */
+.content-section {
+  margin-left: 5px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Current Time Box */
+.content1-box {
+  height: 45%;
+  background-image: url("/assets/named.jpg");
+  border: 1px solid #dee2e6;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+
+/* Content Boxes */
+.content-box {
+  background-color: white;
+  border: 1px solid #dee2e6;
+  padding: 60px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+
+.content-feed {
+  background-color: white;
+  border: 1px solid #dee2e6;
+  padding: 60px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+
+
+.content-box h4 {
+  border-radius: 8px;
+  margin: -46px -50px 50px;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+  color: #fffbfb;
+  padding: 7px;
+  background-color: darkorange;
+}
+
+.content-remind h4
+{
+  border-radius: 8px;
+  margin: 2px -7px 50px;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+  color: #fffbfb;
+  padding: 7px;
+  background-color: darkorange;
+
+}
+
+.content-box p,
+.content-box ul {
+  font-size: 14px;
+  color: #495057;
+  margin: 0;
+}
+
+.content-box ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.content-box ul li {
+  margin: 5px 0;
+}
+
+/* All Reminders Section */
+.content-remind {
+  border: 1px solid #dee2e6;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+.content-feed
+{
+background-color: white;
+border: 1px solid #dee2e6;
+padding: 60px;
+border-radius: 8px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+text-align: center;
+}
+
+.content-feed h4 {
+  border-radius: 8px;
+  margin: -46px -50px 50px;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+  color: #fffbfb;
+  padding: 7px;
+  background-color: darkorange;
+}
+
+/* Reminder Row Styling */
+.reminder-row {
+  gap: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+/* Employee Details */
+.employee-details {
+  flex: 1;
+  text-align: left;
+}
+
+.employee-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.employee-id {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+/* Employee Image */
+.employee-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-left: 15px;
+}
+
+
+.content-remind {
+  margin-top: -47%;
+  border: 1px solid #dee2e6;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.officelogo {
+  text-align: right;
+}
+
+.content-doc
+{
+  height: 282px;
+  background-color: white;
+  border: 1px solid #dee2e6;
+  padding: 60px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.content-doc h4
+{
+ 
+    border-radius: 8px;
+    margin: -46px -50px 50px;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    color: #fffbfb;
+    padding: 7px;
+    background-color: darkorange; 
+}
+
+.search-container {
+  display: flex;
+ align-items: center;
+  margin-top: -32px;
+  margin-left: -10%;
+}
+
+.search-bar {
+  flex: 1; /* Allow the input to take available space */
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: #007bff; /* Highlight border on focus */
+}
+
+.search-button {
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #fff;
+  background-color: black;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: skyblue; /* Darker blue on hover */
+}
+
+.content-joinee
+{
+  margin-top: -14%;
+  background-color: white;
+  border: 1px solid #dee2e6;
+  padding: 60px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.content-joinee h4
+{
+  border-radius: 8px;
+  margin: -46px -50px 50px;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+  color: #fffbfb;
+  padding: 7px;
+  background-color: darkorange;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .welcome-section {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .content-section
+  {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .officelogo {
+    margin-top: 10px;
+    align-self: center;
+  }
+
+  .employee-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .welcome-text h2 {
+    font-size: 18px;
+  }
+
+  .welcome-text p {
+    font-size: 12px;
+  }
+
+ 
+  
+}
+
+@media (max-width: 480px) {
+  .employee-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .welcome-text h2 {
+    font-size: 16px;
+  }
+
+  .welcome-text p {
+    font-size: 10px;
+  }
+}
+
+
+@media (max-width: 1270px) 
+{
+  .content-box
+  {
+    height: 70%;
+  }
+  .search-container 
+  {
+    margin-left: -28%;
+  }
+
+  .content-remind 
+  {
+       margin-top: -60%;
+  }
+
+  .content-joinee 
+  {
+    margin-top: -25%;
+
+  }
+  
+}
+
+@media (max-width: 1235px)
+{
+  .search-container
+  {
+    margin-left: 0px;
+  }
+
+.content-remind
+{
+  margin-top: 14%;
+}
+ .content1-box{
+  height: 75%;
+ }
+ .content-joinee
+ {
+  margin-top: 15%;
+ }
+
+ .content-feed{
+  margin-top: -66%;
+ }
+} 
+
+
+@media (max-width: 1206px) 
+
+{
+  .search-container
+  {
+    margin-left: 0px;
+  }
+
+  .content-remind
+  {
+    margin-top: 60px;
+  }
+
+  
+  .content-joinee
+  {
+    margin-top: 65px;
+  }
+  .content-feed
+  {
+    margin-top: -67%;
+  }
+  
+
+
+
+}
+
+@media(max-width:1155px)
+{
+  
+  .content-feed
+  {
+    margin-top: -70%;
+  }
+}
+
+@media(max-width:1105px)
+{
+  
+  .content-feed
+  {
+    margin-top: -75%;
+  }
+}
+
+@media(max-width:1124px)
+{
+  
+  .content-feed
+  {
+    margin-top: -82%;
+  }
+}
+
+
+@media(max-width:1000px)
+
+{
+  .welcome-message
+  
+  {
+    margin-top: -5px;
+  }
+
+
+}
+@media(max-width:975px)
+{
+
+  .welcome-section 
+  {
+    padding: 0px;
+  }
+
+  .employee-info
+  {
+    font-size: 1.5rem;
+  }
+
+  .search-container
+  {
+    margin-left: -15%;
+  }
+  .content-feed
+  {
+    margin-top: -89%;
+  }
+  .welcome-message 
+  {
+    margin-top: -15px;
+  }
+
+}
+
+
+@media(max-width:925px)
+{
+   .welcome-section
+   {
+    flex-direction: column;
+   }
+   .company-name
+   {
+    left: 46%;
+   }
+  
+   .content-feed{
+    margin-top: -110%;
+   }
+  
+}
+
+@media(max-width:913px)
+{
+  .search-container{
+    margin-left: -25px;
+  }
+
+  .content1-box{
+    height: 78%;
+  }
+  .content-box{
+    height: 38%;
+  }
+  .content-feed{
+    margin-top: 0px;
+  }
+}
+
+@media(max-width:880px)
+{
+   .company-name
+   {
+    left: 50%;
+    font-size: 17px;
+   }
+}
+
+
+@media(max-width:780px)
+{
+  .welcome-section
+  {
+    align-items: center;
+  }
+  .employee-img{
+    margin-left: 80px;
+    width: 77px;
+    height: 77px;
+  }
+  .officelogo{
+    width: 150px;
+    margin-left: -50%;
+  }
+}

@@ -1,0 +1,124 @@
+<!-- Top Bar -->
+<div class="company-bar">
+  <span class="company-name">Intellisys IT Solutions Pvt. Ltd</span>
+  <div class="right-content">
+    <div class="employee-details">
+      <span class="employee-name">{{ username || 'Guest' }}</span>
+      <div class="employee-info">
+        <span>Employee <strong>Code:</strong> {{ employeeCode || 'N/A' }}</span>
+      </div>
+    </div>
+    <img
+    [src]="emp.imageUrl ? emp.imageUrl : 'assets/employee (1).png'"
+    (error)="emp.imageUrl = null"
+    alt="{{ employeeName || 'Employee' }}'s photo"
+    class="employee-image"
+  />
+  
+    <img
+      src="assets/notification (1).avif"
+      alt="Notification"
+      class="notification-icon"
+    />
+  </div>
+</div>
+
+<!-- Welcome Section -->
+<div class="right-side">
+  <div class="welcome-section">
+    <div class="makeflex">
+      <div class="employee-info">
+        <img
+          [src]="emp.imageUrl ? emp.imageUrl : 'assets/employee (1).png'"
+          alt="{{ emp.name || 'Employee' }}'s photo"
+          class="employee-image"
+        />
+        <h1>Welcome, Mr. {{ username || 'Guest' }}</h1>
+      </div>
+    
+      <div class="welcome-message">
+        <p>Hope you have a great day at work!</p>
+      </div>
+    </div>
+    <div class="officelogo">
+      <img src="assets/logo (2).png" alt="Office Logo" />
+    </div>
+  </div>
+</div>
+
+<!-- Main Content Area -->
+<div class="content-section">
+
+  <!-- Current Time & Date -->
+  <div class="content1-box">
+    <h4>Current Time & Date</h4>
+    <p>{{ currentTime || '--:--:--' }}</p>
+    <p>{{ currentDate || 'Loading date...' }}</p>
+  </div>
+
+  <!-- News Center -->
+  <div class="content-box">
+    <h4>News Center</h4>
+    <p>No records to display</p>
+  </div>
+
+  <!-- Company Documents -->
+  <div class="content-doc">
+    <h4>Company Documents</h4>
+    <div class="search-container">
+      <input type="text" placeholder="Search for documents..." class="search-bar" />
+      <button type="button" class="search-button">Search</button>
+    </div>
+  </div>
+
+<!-- Upcoming Birthdays Section -->
+<div class="content-remind">
+  <h4>Upcoming Birthdays</h4>
+
+  <p *ngIf="upcomingBirthdays.length === 0">No upcoming birthdays this year</p>
+
+  <div *ngFor="let emp of upcomingBirthdays" class="reminder-row">
+    <img
+      [src]="emp.imageUrl ? emp.imageUrl : 'assets/employee (1).png'"
+      (error)="emp.imageUrl = null"
+      alt="{{ emp.name || 'Employee' }}'s photo"
+      class="employee-image"
+    />
+    <div class="employee-details">
+      <p class="employee-name">{{ emp.empID || 'ID...' }} - {{ emp.name || 'Name...' }}</p>
+      <p class="employee-id"><strong>Branch -</strong> {{ emp.branch || 'Loading...' }}</p>
+      <p class="employee-id"><strong>Department -</strong> {{ emp.department || 'Loading...' }}</p>
+      <p class="employee-id"><strong>Email -</strong> {{ emp.email || 'Loading...' }}</p>
+      <p class="employee-id"><strong>Birthday -</strong> {{ emp.dateOfBirth | date: 'dd MMM, yyyy' }}</p>
+      <p class="employee-id"><strong>Reminder -</strong> 🎉 Upcoming Birthday!</p>
+    </div>
+  </div>
+</div>
+  <!-- Feed -->
+  <div class="content-feed">
+    <h4>Feed</h4>
+    <p>No new updates</p>
+  </div>
+
+  <!-- Employee Documents -->
+  <div class="content-doc">
+    <h4>Employee Documents</h4>
+    <div class="search-container">
+      <input type="text" placeholder="Search for documents..." class="search-bar" />
+      <button type="button" class="search-button">Search</button>
+    </div>
+  </div>
+
+  <!-- To Do List -->
+  <div class="content-box">
+    <h4>To Do List</h4>
+    <button type="button" class="search-button">+ Add Task</button>
+  </div>
+
+  <!-- New Joinee -->
+  <div class="content-joinee">
+    <h4>New Joinee</h4>
+  
+    </div>
+  </div>
+

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Employee Info</title>
+</head>
+<body>
+  <div class="navbar">
+    <div class="logo">Intellisys IT Solution Pvt Ltd</div>
+  </div>
+
+  <div class="employee-container">
+    <!-- Employee header with name and photo -->
+    <div class="employee-image">
+      <img [src]="profileData.imageUrl || 'assets/employee (1).png'" alt="Employee Image" />
+    </div>
+    
+    <div class="employee-header">
+      <!-- Employee name and details -->
+      <div class="employee-details">
+        <!-- Employee name as a headline -->
+        <div class="headline">
+          <span>{{ profileData.name || 'No Name' }}</span>
+        </div>
+
+        <!-- Flex container for employee details -->
+        <div class="flex-row">
+          <div class="flex-item">
+            <div class="detail">
+              <label>Employee Code:</label>
+              <span>{{ profileData.employeeCode || 'N/A' }}</span>
+            </div>
+            <div class="detail">
+              <label>Location:</label>
+              <span>{{ profileData.location || 'N/A' }}</span>
+            </div>
+          </div>
+
+          <div class="flex-item">
+            <div class="detail">
+              <label>Department:</label>
+              <span>{{ profileData.department || 'N/A' }}</span>
+            </div>
+            <div class="detail">
+              <label>Manager:</label>
+              <span>{{ profileData.manager || 'N/A' }}</span>
+            </div>
+          </div>
+
+          <div class="flex-item">
+            <div class="detail">
+              <label>Joining Date:</label>
+              <span *ngIf="profileData.joiningDate; else noJoiningDate">
+                {{ profileData.joiningDate | date:'dd-MMM-yyyy' }}
+              </span>
+              <ng-template #noJoiningDate>
+                <span>N/A</span>
+              </ng-template>
+            </div>
+            <div class="detail">
+              <label>Salary:</label>
+              <span>{{ profileData.salary || 'N/A' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Additional Info Cards -->
+  <div class="card-container">
+    <div class="card">
+      <div class="card-header">PF Applicable</div>
+      <div class="card-body">
+       
+        <p class="card-text"><strong>PF No:</strong> {{ profileData.panNumber || 'N/A' }}</p>
+        <p class="card-text"><strong>UAN:</strong> {{ profileData.aadharNumber || 'N/A' }}</p>
+        <p class="card-text"><strong>Prv Member ID:</strong> {{ profileData.previousMemberId || 'N/A' }}</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Pension Applicable</div>
+      <div class="card-body">
+        <p class="card-text"><strong>EPS Joining Date:</strong> {{ profileData.epsJoiningDate || 'N/A' }}</p>
+        <p class="card-text"><strong>EPS Exit Date:</strong> {{ profileData.epsExitDate || 'N/A' }}</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Esic Applicable</div>
+      <div class="card-body">
+        <p class="card-text"><strong>ESIC NO:</strong> {{ profileData.esicNo || 'N/A' }}</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">PT Applicable</div>
+      <div class="card-body">
+        <p class="card-text"><strong>EPS NO:</strong> {{ profileData.epsNo || 'N/A' }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- KYC Details -->
+  <div class="container2">
+    <p><strong>KYC Detail:</strong> </p>
+  </div>
+
+  <!-- Cards for KYC Info -->
+  <div class="card-container">
+    <div class="card">
+      <div class="card-header">PAN Number:</div>
+      <div class="card-body">
+        <p class="card-text"><strong>{{ profileData.panNumber || 'N/A' }}</strong></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Aadhar Number:</div>
+      <div class="card-body">
+        <p class="card-text"><strong>{{ profileData.aadharNumber || 'N/A' }}</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Employee Status -->
+  <div class="container2">
+    <p><strong>Employee Status:</strong> </p>
+  </div>
+
+  <!-- Cards for Employee Status -->
+  <div class="card-container">
+    <div class="card">
+      <div class="card-header">Branch:</div>
+      <div class="card-body">
+        <p class="card-text"><strong>{{ profileData.branch || 'N/A' }}</strong></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Department:</div>
+      <div class="card-body">
+        <p class="card-text"><strong>{{ profileData.department || 'N/A' }}</strong></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Grade:</div>
+      <div class="card-body">
+        <p class="card-text"><strong>{{ profileData.grade || 'N/A' }}</strong></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Designation:</div>
+      <div class="card-body">
+        <p class="card-text"><strong>{{ profileData.designation || 'N/A' }}</strong></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Employee Category:</div>
+      <div class="card-body">
+        <p class="card-text"><strong>{{ profileData.grade || 'N/A' }}</strong></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Project Type:</div>
+      <div class="card-body">
+        <p class="card-text"><strong>{{ profileData.projectType || 'N/A' }}</strong></p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

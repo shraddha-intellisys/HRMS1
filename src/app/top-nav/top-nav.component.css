@@ -1,0 +1,218 @@
+
+*
+{
+    font-family: Arial, sans-serif;
+}
+
+/* Top Navigation Bar */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #111111;
+    color: white;
+  }
+  /* Employee Image */
+.employee-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-left: 15px;
+}
+  
+  /* Hamburger Button */
+  .hamburger-btn {
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+  }
+  
+  /* Main Title */
+  h4 {
+    margin: 6px;
+  }
+  
+  /* User Info Section */
+  .main {
+  
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+  }
+  
+  .notify {
+    font-size: 20px;
+  }
+  
+  /* Sidebar Menu */
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Initially hidden */
+    width: 250px;
+    height: 100%;
+    background-color: #007bff;
+    padding-top: 60px;
+    transition: left 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    color: white;
+  }
+  
+  .nav-menu.open {
+    left: 0; /* Slide in when open */
+  }
+  
+  .nav-menu ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .nav-menu ul li {
+    padding: 15px 20px;
+  }
+  
+  .nav-menu ul li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+
+  .sidebar {
+    width: 250px;
+    height: 100vh;
+    padding: 13px;
+    box-sizing: border-box;
+    background-color: #f8f9fa;
+    border-right: 1px solid #ddd;
+    font-family: Arial, sans-serif;
+    position: relative;
+  
+  }
+  
+  .menu-class {
+    display: none;
+    text-align: center;
+  }
+  
+  .menu-class i {
+    color: black;
+    font-size: 30px;
+    cursor: pointer;
+  }
+  
+  .logo {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .title {
+    color: #333;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-right: 50px;
+    margin-top: 30px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  li {
+    margin: 10px 0;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+
+  
+  a:hover {
+  
+    color: #ffffff;
+  }
+  
+  .dropdown {
+    list-style-type: none;
+    padding-left: 20px;
+  }
+  
+  .dropdown li {
+    margin: 5px 0;
+  }
+  
+  .dropdown a {
+    font-size: 14px;
+    padding: 5px 10px;
+    color: #555;
+  }
+  
+  .dropdown a:hover {
+    background-color: #dcdcdc;
+  }
+  
+  .arrow {
+    display: inline-block;
+    margin-left: auto;
+    font-size: 23px;
+    transition: transform 0.3s ease;
+    transform: rotate(0deg);
+  }
+  
+  .arrow.open {
+    transform: rotate(180deg);
+  }
+  
+  a:hover .arrow {
+    color: #f9fcff;
+  }
+  
+  /* Main Menu List */
+  #menuList {
+    padding-left: 0;
+    list-style-type: none;
+  }
+  @media (max-width: 780px) {
+    
+    .menu-class {
+      display: block;
+    }
+  
+    #menuList {
+      left: -250px; /* Keep it hidden by default */
+      max-height: 0;
+      overflow: hidden;
+     
+    }
+  
+    #menuList.open {
+      transition: left 1.0s slide;
+      max-height: 500px;
+      width: 65%;
+      left: 0; /* Slide in when open */
+      background-color: orange;
+    }
+  
+  
+    .menu-class {
+      display: block; /* Always display the hamburger icon */
+    }
+  }

@@ -1,0 +1,173 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+<div class="attendance-container">
+  <div class="add-attendance-header">
+    <div class="header">
+      <h2>Add Attendance Application</h2>
+      <p>Employee Name: {{ employeeName }} | Employee Code: {{ employeeCode }}</p>
+    </div>
+    <div class="buttons-container">
+      <button (click)="onSubmit()">Submit Application</button>
+      <button (click)="onCancel()">Cancel</button>
+
+      
+      
+    </div>
+  </div>
+
+  
+
+  <div class="main-section">
+    <div class="left-section">
+      <form [formGroup]="attendanceForm">
+        <div class="form-group">
+          <strong><label for="applicationDate">Application Date:</label></strong>
+          <input type="date" id="applicationDate" formControlName="applicationDate"
+            class="form-control custom-date-input" />
+          <div *ngIf="attendanceForm.get('applicationDate')?.invalid && attendanceForm.get('applicationDate')?.touched"
+            class="error">
+            Date is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <strong><label for="applicationType">Application Type:</label></strong>
+          <select id="applicationType" formControlName="applicationType" class="form-control select-no-box">
+            <option value="casual">Attendance Regularisation</option>
+            <option value="sick">Shift Regularisation</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <strong><label for="leaveType">Type:</label></strong>
+          <select id="leaveType" formControlName="leaveType" class="form-control select-no-box">
+            <option value="full">Public Holiday At Client Side</option>
+            <option value="half">Weekly Off</option>
+            <option value="half">Leave Without Pay</option>
+          </select>
+        </div>
+
+        <label class="circle-option">
+          <input type="radio" name="attendanceBasis" value="day" formControlName="attendanceBasis"
+            (change)="onBasisChange('day')" />
+          <span class="circle"></span>
+          Day Basis
+        </label>
+
+        <label class="circle-option">
+          <input type="radio" name="attendanceBasis" value="time" formControlName="attendanceBasis"
+            (change)="onBasisChange('time')" />
+          <span class="circle"></span>
+          Time Basis
+        </label>
+
+        <div *ngIf="isDayBasisSelected" class="form-group">
+          <strong><label for="fromDate">From Date:</label></strong>
+          <input type="date" formControlName="fromDate" id="fromDateOptions" class="form-control custom-date-input" />
+        </div>
+
+        <div *ngIf="isDayBasisSelected" class="form-group">
+          <strong><label for="toDate">To Date:</label></strong>
+          <input type="date" formControlName="toDate" id="toDateOptions" class="form-control custom-date-input" />
+        </div>
+
+        <div *ngIf="isTimeBasisSelected" class="form-group">
+          <label><strong>From Date:</strong>
+            <input type="date" formControlName="fromDate" id="fromDateOptions" class="form-control custom-date-input" />
+          </label>
+        </div>
+
+        <div *ngIf="isTimeBasisSelected" class="form-group">
+          <label><strong>From Time:</strong>
+            <input type="time" formControlName="startTime" class="form-control custom-date-input" />
+          </label>
+        </div>
+
+        <div *ngIf="isTimeBasisSelected" class="form-group">
+          <label><strong>To Time:</strong>
+            <input type="time" formControlName="endTime" class="form-control custom-date-input" />
+          </label>
+          <label for="hours">Total Hours: ____</label>
+        </div>
+
+        <div class="form-group">
+          <strong><label for="reason">Reason:</label></strong><br>
+          <input type="text" id="reason" formControlName="reason" class="form-control line-input" />
+          <div *ngIf="attendanceForm.get('reason')?.invalid && attendanceForm.get('reason')?.touched" class="error">
+            Reason is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <strong><label for="remarks">Remarks:</label></strong><br>
+          <input type="text" id="remarks" formControlName="remarks" class="form-control line-input" />
+        </div>
+
+        <div class="form-group">
+          <strong><label for="ccTo">CC To (Email ID):</label></strong><br>
+          <input type="email" id="ccTo" formControlName="ccTo" class="form-control line-input" />
+          <div *ngIf="attendanceForm.get('ccTo')?.invalid && attendanceForm.get('ccTo')?.touched" class="error">
+            Invalid email address.
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="right-section">
+      <div class="date-range-inline">
+        <div class="form-group-inline">
+          <strong><label for="fromDate">From:</label></strong>
+          <input type="date" id="fromDate" class="form-control custom-date-input">
+        </div>
+
+        <div class="form-group-inline">
+          <strong><label for="toDate">To:</label></strong>
+          <input type="date" id="toDate" class="form-control custom-date-input">
+        </div>
+
+        <div class="icon-buttons">
+          <button class="icon-button">
+            <i class="fa fa-sync-alt"></i>
+          </button>
+          <button class="icon-button">
+            <i class="fa fa-print"></i>
+          </button>
+        </div>
+      </div>
+
+      <table class="details-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Roster</th>
+            <th>Muster</th>
+            <th>In Time</th>
+            <th>Out Time</th>
+            <th>OT Hours</th>
+            <th>Total Hours</th>
+            <th>Late Marks</th>
+            <th>Late Hours</th>
+            <th>Enter Departure Mark</th>
+            <th>Enter Departure Hours</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let record of attendanceData">
+            <td>{{ record.date | date }}</td>
+            <td>{{ record.roster }}</td>
+            <td>{{ record.muster }}</td>
+            <td>{{ record.inTime }}</td>
+            <td>{{ record.outTime }}</td>
+            <td>{{ record.otHours }}</td>
+            <td>{{ record.totalHours }}</td>
+            <td>{{ record.lateMarks }}</td>
+            <td>{{ record.lateHours }}</td>
+            <td>{{ record.departureMark }}</td>
+            <td>{{ record.departureHours }}</td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>

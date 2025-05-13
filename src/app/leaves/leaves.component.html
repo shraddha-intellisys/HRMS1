@@ -1,0 +1,219 @@
+<!-- Left Panel -->
+<div class="navbar">
+    <h2>Intellisys IT Solutions Private Limited</h2>
+  </div>
+  
+  <div class="heading">
+    <h4>Leave</h4>
+  </div>
+  <div class="commondiv">
+    
+    <div class="divleft">
+      <div class="leave-dashboard">
+        <div class="calendar-container">
+          <mat-form-field appearance="outline">
+            <mat-label>Choose Date Range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate placeholder="Start date" [(ngModel)]="startDate" />
+              <input matEndDate placeholder="End date" [(ngModel)]="endDate" />
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+          <!-- Corrected Submit and Refresh buttons -->
+<button mat-raised-button color="primary" (click)="submitLeaveApplication()">
+  Submit Leave
+</button>
+
+<button mat-raised-button color="accent" (click)="refresh()">
+  <mat-icon>refresh</mat-icon> Refresh
+</button>
+
+        </div>
+      
+      
+    
+  
+        <!-- Leave Data -->
+        <div class="leave-type" *ngFor="let leave of leaves">
+          <h3>{{ leave.name }}</h3>
+          <div class="circle-chart">
+            <svg viewBox="0 0 36 36" class="circular-chart" >
+              <path
+                class="circle-bg"
+                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+              />
+              <path
+                class="circle"
+                [attr.stroke-dasharray]="leave.utilised + ', 100'"
+                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+              />
+            </svg>
+            <span>{{ leave.utilised }}/{{ leave.total }}</span>
+          </div>
+          <ul>
+            <li>Total: {{ leave.total }}</li>
+            <li>Utilised: {{ leave.utilised }}</li>
+            <li>Balance: {{ leave.balance }}</li>
+            <li>Pending: {{ leave.pending }}</li>
+            <li>Encashment: {{ leave.encashment }}</li>
+            <li>Adjustment: {{ leave.adjustment }}</li>
+            <li>Net: {{ leave.net }}</li>
+          </ul>
+        </div>
+  
+        <button class="details-btn">Show Leave Details</button>
+      </div>
+    </div>
+  
+    <div class="divcenter">
+      <!-- Calendar Panel -->
+      <div class="calendar-panel">
+        <full-calendar [options]="calendarOptions"></full-calendar>
+
+      </div>
+    </div>
+   
+    <!-- Right Panel -->
+    
+  
+    <div class="divright">
+      <div class="right-panel">
+        <div class="attendance-summary">
+          <h3>Absence In Current Month</h3>
+  
+          <!-- Attendance Container -->
+          <div class="attendance-container">
+            <!-- First Row: Present & Absent -->
+            <div class="attendance-row">
+              <div class="attendance-box present">
+                <div class="attendance-details">
+                  <p class="status-count"> Present {{ attendanceSummary.present }}</p>
+                </div>
+  
+              </div>
+              <div class="attendance-box absent">
+                <div class="attendance-details">
+                  <p class="status-count">Absent {{ attendanceSummary.absent }}</p>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Second Row: Leave & LWP -->
+            <div class="attendance-row">
+              <div class="attendance-box leave">
+                <div class="attendance-details">
+                  <p class="status-count">Leave {{ attendanceSummary.leave }}</p>
+                </div>
+              </div>
+  
+              <div class="attendance-box lwp">
+                <div class="attendance-details">
+                  <p class="status-count">LWP {{ attendanceSummary.lwp }}</p>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Third Row: Leave Submit & Attendance Submit -->
+            <div class="attendance-row">
+              <div class="attendance-box leave-submit">
+                <div class="attendance-details">
+                  <p class="status-count">Leave (Submit) {{ attendanceSummary.leaveSubmit }}</p>
+                </div>
+              </div>
+              <div class="attendance-box attendance-submit">
+                <div class="attendance-details">
+                  <p class="status-count">Attendance (Submit) {{ attendanceSummary.attendanceSubmit }}</p>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Fourth Row: PHY & WEO -->
+            <div class="attendance-row">
+              <div class="attendance-box phy">
+                <div class="attendance-details">
+                  <p class="status-count">PHY {{ attendanceSummary.phy }}</p>
+                </div>
+  
+              </div>
+              <div class="attendance-box weo">
+                <div class="attendance-details">
+                  <p class="status-count">WEO {{ attendanceSummary.weo }}</p>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Fifth Row: Reminders & Half Day -->
+            <div class="attendance-row">
+              <div class="attendance-box reminders">
+                <div class="attendance-details">
+                  <p class="status-count">Reminders {{ attendanceSummary.reminders }}</p>
+                </div>
+              </div>
+              <div class="attendance-box half-day">
+                <div class="attendance-details">
+                  <p class="status-count">Half Day {{ attendanceSummary.halfDay }}</p>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Sixth Row: Blocked -->
+            <div class="attendance-row">
+              <div class="attendance-box blocked">
+                <div class="attendance-details">
+                  <p class="status-count">Blocked (DOJ/DOE) {{ attendanceSummary.blocked }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="upcoming-holidays">
+          <h4>
+            Upcoming Holidays
+            <a routerLink="/holiday" class="view-holidays-link"> View Holidays</a>
+  
+          </h4>
+          <div class="holiday-list">
+            <br>
+            <p *ngIf="!holidays.length">No Records to Display</p>
+            <ul *ngIf="holidays.length">
+              <li *ngFor="let holiday of holidays">{{ holiday.name }} - {{ holiday.date }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+    </div>
+        
+  <!-- Attendance Summary -->
+  <div class="attendance-sum">
+    <div class="attendance-container">
+      <h3>Leave Application</h3>
+      <div class="date-filter">
+        <label for="attendance-date">Showing Attendance From</label>
+        <input type="date" id="attendance-date" [(ngModel)]="attendanceDate" />
+        <button (click)="refresh()">🔄</button>
+      </div>
+  
+      <!-- Attendance Summary Cards -->
+      <div class="summary-cards">
+        <div
+          class="card"
+          *ngFor="let card of cards"
+          [ngClass]="card.class"
+          (click)="handleCardClick(card)">
+          <span>{{ card.label }}</span>
+          <span class="count">{{ card.count }}</span>
+        </div>
+      </div>
+     
+      
+  
+      <!-- No Records Section -->
+      <div class="no-records">
+        <p>No Records to Display</p>
+      </div>
+    </div>
+  </div>
+

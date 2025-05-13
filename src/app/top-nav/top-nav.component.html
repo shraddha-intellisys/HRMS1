@@ -1,0 +1,80 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="top-nav">
+  <!-- Hamburger Button -->
+  <button class="hamburger-btn" (click)="toggleMenu()">
+    <i class="fa fa-bars"></i>
+  </button>
+
+  <!-- HRMThread Title -->
+  <h4>HRMTHREAD</h4>
+
+  <!-- User Info Section -->
+  <div class="main">
+    <div class="user-info">
+   
+      <span class="user-name">Mr....</span>
+      <span class="user-id">NQE00392</span>
+    </div>
+    <div class="profile-img">
+        <img src="assets/employee (1).png" alt="Employee Image" class="employee-image">
+    </div>
+    <div class="user-info1">
+      <div class="notify">
+        <i class="fa fa-bell"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="menuList"  [ngClass]="{'open': isMenuOpen}">
+    <ul>
+        <!-- Home Section -->
+        <li>
+          <a href="javascript:void(0);" (click)="toggleDropdown('home')">
+            <span>🏠</span> Home
+            <span class="arrow" [ngClass]="{ open: isDropdownOpen.home }">&#9662;</span>
+          </a>
+          <ul *ngIf="isDropdownOpen.home" class="dropdown">
+            <li><a [routerLink]="['/right']" routerLinkActive="active">Home</a></li>
+           
+          </ul>
+        </li>
+    
+
+        <!-- Profile Section -->
+        <li>
+          <a href="javascript:void(0);" (click)="toggleDropdown('profile')">
+            <span>👤</span> Profile
+            <span class="arrow" [ngClass]="{ open: isDropdownOpen.profile }">&#9662;</span>
+          </a>
+          <ul *ngIf="isDropdownOpen.profile" class="dropdown">
+            <li><a [routerLink]="['/profile']">View Profile</a></li>
+            <li><a href="javascript:void(0);"></a></li>
+          </ul>
+        </li>
+
+        <!-- Additional Sections -->
+        <li><a [routerLink]="['/shedule']"><span>🗓️</span> Time & Attendance</a></li>
+        <li><a [routerLink]="['/leave']"><span>✅</span> Leave</a></li>
+        <!-- Payroll Section -->
+        <li>
+            <a href="#" (click)="toggleDropdown('payroll')">
+                <span>💰</span> Payroll
+                <span class="arrow" [ngClass]="{'open': isDropdownOpen.payroll}">&#9662;</span>
+            </a>
+            <ul *ngIf="isDropdownOpen.payroll" class="dropdown">
+                <li><a href="#">Payslip</a></li>
+                <li><a href="#">Salary History</a></li>
+            </ul>
+        </li>
+
+        <!-- Other Links -->
+        <li><a href="#"><span>🚪</span> Apply Exit</a></li>
+        <li><a href="#"><span>📊</span> Organisation Chart</a></li>
+        <li><a [routerLink]="['/employee']"><span>✅</span> Employee Registration</a></li>
+
+
+    </ul>
+</div>
+

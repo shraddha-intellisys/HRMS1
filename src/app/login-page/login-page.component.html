@@ -1,0 +1,86 @@
+<div class="login-page">
+  <div class="left-section">
+    <img src="assets/h6.png" alt="HRM Logo" class="logo" />
+    <h1>Welcome to HRM</h1>
+  </div>
+
+  <div class="right-section">
+    <div class="right-container">
+      <div class="logo-container">
+        <img src="assets/logo.png" alt="Intellisys Logo" class="intellisys-logo" />
+      </div>
+
+      <div class="login-form-container">
+        <form
+          class="login-form"
+          #loginForm="ngForm"
+          (ngSubmit)="login(loginForm)"
+          novalidate
+        >
+          <!-- Username Input -->
+          <div class="input-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              ngModel
+              required
+              minlength="3"
+              maxlength="15"
+              pattern="^[a-zA-Z0-9]+$"
+              placeholder="Enter your username"
+              #username="ngModel"
+            />
+            <!-- Username Validation Errors -->
+            <div class="error" *ngIf="username.invalid && (username.dirty || username.touched)">
+              <small *ngIf="username.errors?.['required']">Username is required.</small>
+              <small *ngIf="username.errors?.['minlength']">
+                Username must be at least 3 characters.
+              </small>
+              <small *ngIf="username.errors?.['maxlength']">
+                Username must not exceed 15 characters.
+              </small>
+              <small *ngIf="username.errors?.['pattern']">
+                Username can only contain letters and numbers.
+              </small>
+            </div>
+          </div>
+
+          <!-- Password Input -->
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              ngModel
+              required
+              minlength="6"
+             
+              placeholder="Enter your password"
+              #password="ngModel"
+            />
+            <!-- Password Validation Errors -->
+            <div class="error" *ngIf="password.invalid && (password.dirty || password.touched)">
+              <small *ngIf="password.errors?.['required']">Password is required.</small>
+              <small *ngIf="password.errors?.['minlength']">
+                Password must be at least 6 characters.
+              </small>
+              <small *ngIf="password.errors?.['pattern']">
+                Password must include at least one uppercase letter, one lowercase letter, and one number.
+              </small>
+            </div>
+          </div>
+
+          <a href="#" class="forgot-password">Forgot password?</a>
+          <button type="submit">Login</button>
+
+          <div class="signin-link">
+            <p>Don't have an account? <a routerLink="/signup">Sign Up</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

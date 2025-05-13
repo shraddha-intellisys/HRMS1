@@ -1,0 +1,152 @@
+<body>
+    <div class="company-bar">
+        Intellisys IT Solutions Pvt. Ltd
+    </div>
+
+    <div class="form-background">
+        <div class="container">
+            <h1>Employee Registration</h1>
+
+            <div *ngIf="profileData">
+                <h2>Employee Profile</h2>
+                <p><strong>Name:</strong> {{ profileData.name }}</p>
+                <p><strong>Email:</strong> {{ profileData.email }}</p>
+                <p><strong>Employee Code:</strong> {{ profileData.employeeCode }}</p>
+                <p><strong>Department:</strong> {{ profileData.department }}</p>
+                <p><strong>Manager:</strong> {{ profileData.manager }}</p>
+                <p><strong>Salary:</strong> {{ profileData.salary | currency }}</p>
+                <p><strong>Designation:</strong> {{ profileData.designation }}</p>
+                <p><strong>Project Type:</strong> {{ profileData.projectType }}</p>
+                <p><strong>Date of Birth:</strong> {{ profileData.dateOfBirth }}</p>
+                <p><strong>Gender:</strong> {{ profileData.gender }}</p>
+                <p><strong>Profile Image:</strong></p>
+                <img *ngIf="profileData.imageUrl" [src]="profileData.imageUrl" alt="Profile Image" width="150">
+            </div>
+
+            <form [formGroup]="employeeForm" (ngSubmit)="submitEmployeeForm()">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input id="name" formControlName="name" type="text" placeholder="Name" />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" formControlName="email" type="email" placeholder="Email" />
+                </div>
+
+                <div class="form-group">
+                    <label for="employeeCode">Employee Code</label>
+                    <input id="employeeCode" formControlName="employeeCode" type="text" placeholder="Employee Code" />
+                </div>
+
+                <div class="form-group gender-group">
+                    <label>Gender</label>
+                    <div class="radio-container">
+                        <label class="radio-label">
+                            <input type="radio" name="gender" formControlName="gender" value="Male" />
+                            <span class="custom-radio"></span> Male
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="gender" formControlName="gender" value="Female" />
+                            <span class="custom-radio"></span> Female
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input id="location" formControlName="location" type="text" placeholder="Location" />
+                </div>
+
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <input id="department" formControlName="department" type="text" placeholder="Department" />
+                </div>
+
+                <div class="form-group">
+                    <label for="manager">Manager</label>
+                    <input id="manager" formControlName="manager" type="text" placeholder="Manager" />
+                </div>
+
+                <div class="form-group">
+                    <label for="joiningDate">Joining Date</label>
+                    <input id="joiningDate" formControlName="joiningDate" type="date" placeholder="Joining Date" />
+                </div>
+
+                <div class="form-group">
+                    <label for="salary">Salary</label>
+                    <input id="salary" formControlName="salary" type="number" placeholder="Salary" />
+                </div>
+
+                <div class="form-group">
+                    <label for="panNumber">PAN Number</label>
+                    <input id="panNumber" formControlName="panNumber" type="text" placeholder="PAN Number" />
+                </div>
+
+                <div class="form-group">
+                    <label for="aadharNumber">Aadhar Number</label>
+                    <input id="aadharNumber" formControlName="aadharNumber" type="text" placeholder="Aadhar Number" />
+                </div>
+
+                <div class="form-group">
+                    <label for="branch">Branch</label>
+                    <input id="branch" formControlName="branch" type="text" placeholder="Branch" />
+                </div>
+
+                <div class="form-group">
+                    <label for="grade">Grade</label>
+                    <input id="grade" formControlName="grade" type="text" placeholder="Grade" />
+                </div>
+
+                <div class="form-group">
+                    <label for="designation">Designation</label>
+                    <input id="designation" formControlName="designation" type="text" placeholder="Designation" />
+                </div>
+
+                <div class="form-group">
+                    <label for="projectType">Project Type</label>
+                    <input id="projectType" formControlName="projectType" type="text" placeholder="Project Type" />
+                </div>
+
+                <!-- Image Upload -->
+                <div class="form-group">
+                    <label for="profileImage">Upload Profile Image</label>
+                    <input id="profileImage" type="file" (change)="onImageUpload($event)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="dateOfBirth">Date of Birth</label>
+                    <input id="dateOfBirth" formControlName="dateOfBirth" type="date" placeholder="Date of Birth" />
+                </div>
+
+                <div class="form-group">
+                    <label for="epsJoiningDate">EPS Joining Date</label>
+                    <input id="epsJoiningDate" formControlName="epsJoiningDate" type="date" placeholder="EPS Joining Date" />
+                </div>
+
+                <div class="form-group">
+                    <label for="epsExitDate">EPS Exit Date</label>
+                    <input id="epsExitDate" formControlName="epsExitDate" type="date" placeholder="EPS Exit Date" />
+                </div>
+
+                <div class="form-group">
+                    <label for="esicNo">ESIC NO</label>
+                    <input id="esicNo" formControlName="esicNo" type="text" placeholder="ESIC NO" />
+                </div>
+
+                <div class="form-group">
+                    <label for="previousMemberId">Prv Member ID</label>
+                    <input id="previousMemberId" formControlName="previousMemberId" type="text" placeholder="Prv Member ID" />
+                </div>
+
+           
+                <div class="form-group">
+                    <label for="epsNo">EPS NO</label>
+                    <input id="epsNo" formControlName="epsNo" type="text" placeholder="EPS NO" />
+                </div>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>

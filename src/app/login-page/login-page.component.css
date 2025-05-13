@@ -1,0 +1,256 @@
+/* Overall Page */
+.login-page {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+/* Left Section */
+.left-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+  box-sizing: border-box;
+  color: #fff;
+}
+
+.left-section .logo {
+  width: 100%; /* Reduced slightly for better scaling */
+  
+  height: auto; /* Maintain aspect ratio */
+ 
+ 
+  margin-bottom: 20px;
+ 
+}
+
+.left-section h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+}
+
+.features li {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+/* Right Section */
+.right-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding: 10px;
+}
+
+/* Right Container for Logo and Form */
+.right-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 450px; /* Slightly narrower for aesthetics */
+  background-color: #fff;
+  font-family: 'Arial', sans-serif;
+  padding: 30px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo Container */
+.logo-container {
+  margin-bottom: 20px;
+  
+}
+
+.intellisys-logo {
+  width: 300px; /* Smaller for alignment */
+  height: 130px;
+  border-radius: 10px;
+}
+
+/* Login Form Container */
+.login-form-container {
+  width: 100%;
+  padding: 20px; /* Add padding for spacing */
+}
+
+/* Login Form */
+.login-form .input-group {
+  margin-bottom: 20px;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  color: #000000;
+}
+
+/* Login Form */
+.login-form input {
+  width: 100%; /* Default reduced width */
+  padding: 8px; /* Default padding */
+  border: 1px solid #080808;
+  border-radius: 5px;
+  font-size: 12px; /* Default font size */
+  margin: 0 auto; /* Centered horizontally */
+  display: block; /* Ensures alignment */
+  font-family: 'Arial', sans-serif;
+}
+
+.login-form input:focus {
+  border-color: #38393b;
+  outline: none;
+  
+}
+
+/* Responsive Design */
+
+.forgot-password {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: darkorange;
+  text-decoration: none;
+  text-align: right;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #636365;
+}
+
+/* Sign-Up Link */
+.signin-link {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.signin-link a {
+  color: darkorange;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.signin-link a:hover {
+  text-decoration: underline;
+}
+.error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-page {
+    flex-direction: column; /* Stacks sections vertically */
+  }
+
+  .left-section {
+    padding: 20px;
+  }
+
+  .left-section .logo {
+    width: 80%; /* Adjust size for smaller screens */
+    max-width: 200px;
+  }
+
+  .right-section {
+    padding: 15px;
+  }
+
+  .right-container {
+    max-width: 350px; /* Reduce form width on smaller screens */
+    padding: 20px;
+  }
+
+  .intellisys-logo {
+    width: 120px; /* Adjust logo size for smaller screens */
+  }
+  .login-form input {
+    width: 90%; /* Wider for smaller screens */
+    padding: 6px; /* Less padding on smaller screens */
+    font-size: 11px; /* Slightly smaller font size */
+  }
+}
+@media (max-width: 480px) {
+  .login-page {
+    flex-direction: column; /* Stacks sections vertically */
+  }
+
+  .left-section {
+    padding: 15px;
+    text-align: center; /* Center align for smaller screens */
+  }
+
+  .left-section .logo {
+    width: 70%; /* Further reduce size for smaller screens */
+    max-width: 150px;
+  }
+
+  .right-section {
+    padding: 10px;
+  }
+
+  .right-container {
+    max-width: 300px; /* Further reduce form width */
+    padding: 15px; /* Adjust padding for smaller screens */
+  }
+
+  .intellisys-logo {
+    width: 100px; /* Smaller logo size */
+  }
+
+  .login-form input {
+    width: 100%; /* Full width for very small screens */
+    padding: 5px; /* Reduced padding */
+    font-size: 10px; /* Smaller font size */
+  }
+
+  .login-form label {
+    font-size: 12px; /* Slightly smaller label font size */
+  }
+
+  .forgot-password {
+    font-size: 12px; /* Smaller font for the link */
+  }
+
+  button {
+    font-size: 14px; /* Slightly smaller button text */
+    padding: 10px; /* Adjust button padding */
+  }
+
+  .signin-link p {
+    font-size: 12px; /* Smaller font for the sign-up link */
+  }
+}
