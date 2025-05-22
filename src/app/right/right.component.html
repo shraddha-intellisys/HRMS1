@@ -33,7 +33,7 @@
           alt="{{ emp.name || 'Employee' }}'s photo"
           class="employee-image"
         />
-        <h1>Welcome, Mr. {{ username || 'Guest' }}</h1>
+        <h1>Welcome, Ms. {{ username || 'Guest' }}</h1>
       </div>
     
       <div class="welcome-message">
@@ -73,9 +73,12 @@
 
 <!-- Upcoming Birthdays Section -->
 <div class="content-remind">
-  <h4>Upcoming Birthdays</h4>
+  <h4>Upcoming Reminders</h4>
 
-  <p *ngIf="upcomingBirthdays.length === 0">No upcoming birthdays this year</p>
+  <p *ngIf="upcomingBirthdays.length === 0">upcoming Birthdays and
+    Work Anniversary
+
+  </p>
 
   <div *ngFor="let emp of upcomingBirthdays" class="reminder-row">
     <img

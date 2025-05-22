@@ -1,5 +1,5 @@
 .calendar-panel {
-  max-width: 100%; /* Allow full width */
+  max-width: 90%; /* Allow full width */
   width: 100%;      /* Take full width of parent */
   margin: 40px auto;
   padding: 20px;
@@ -50,7 +50,8 @@
   padding: 1rem;
   border: 1px solid #ddd;
   border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  background-color: var(--box-black);
+  box-shadow: 0 0 15px 4px rgb(250, 167, 2);
 }
 
 .divleft {
@@ -60,7 +61,7 @@
 
 .divcenter {
   flex: 2;
-  min-width: 400px;
+  min-width: 500px;
 }
 
 .divright {
@@ -71,10 +72,11 @@
 /* Navbar and Heading */
 .navbar, .heading {
   text-align: center;
-  padding: 1rem;
-  background: #1976d2;
-  color: white;
-  margin-bottom: 1rem;
+  padding: 0.5rem;
+  
+  /* background: #fc7420; */
+  color: rgb(246, 126, 14);
+  margin-bottom: rem;
   border-radius: 8px;
 }
 
@@ -130,6 +132,11 @@
   background: #fafafa;
 }
 
+.leave-event .fc-event-title {
+  color: pink !important;
+}
+
+
 /* Buttons */
 button.details-btn,
 button.mat-raised-button {
@@ -142,25 +149,83 @@ button.mat-raised-button {
   margin-top: 1rem;
 }
 
-.attendance-box {
-  border-radius: 6px;
-  padding: 0.5rem;
-  margin: 0.5rem 0;
-  color: #fff;
-}
-
-.attendance-box.present { background: #4caf50; }
-.attendance-box.absent { background: #f44336; }
-.attendance-box.leave { background: #2196f3; }
-.attendance-box.lwp { background: #ff9800; }
-.attendance-box.leave-submit { background: #673ab7; }
-.attendance-box.attendance-submit { background: #009688; }
-.attendance-box.phy { background: #795548; }
-.attendance-box.weo { background: #3f51b5; }
-.attendance-box.reminders { background: #607d8b; }
-.attendance-box.half-day { background: #ffc107; }
-.attendance-box.blocked { background: #9e9e9e; }
-
+.attendance-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: var(--background-black);
+  padding: 20px;
+  border-radius: 10px;
+  }
+  
+  .attendance-row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  }
+  
+  .attendance-box {
+  flex: 1 1 45%;
+  background-color: var(--box-black);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px var(--shadow-orange);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+  }
+  
+  .attendance-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px var(--accent-orange);
+  }
+  
+  .attendance-details {
+  color: var(--text-light);
+  font-size: 16px;
+  font-weight: 500;
+  }
+  
+  .status-count {
+  color: var(--primary-orange);
+  font-weight: bold;
+  font-size: 18px;
+  margin: 0;
+  }
+  
+  .attendance-box.present {
+  border-left: 4px solid #28a745;
+  }
+  .attendance-box.absent {
+  border-left: 4px solid #dc3545;
+  }
+  .attendance-box.leave {
+  border-left: 4px solid #ffc107;
+  }
+  .attendance-box.lwp {
+  border-left: 4px solid #17a2b8;
+  }
+  .attendance-box.leave-submit {
+  border-left: 4px solid #fd7e14;
+  }
+  .attendance-box.attendance-submit {
+  border-left: 4px solid #20c997;
+  }
+  .attendance-box.phy {
+  border-left: 4px solid #6c757d;
+  }
+  .attendance-box.weo {
+  border-left: 4px solid #6f42c1;
+  }
+  .attendance-box.reminders {
+  border-left: 4px solid #007bff;
+  }
+  .attendance-box.half-day {
+  border-left: 4px solid #6610f2;
+  }
+  .attendance-box.blocked {
+  border-left: 4px solid #343a40;
+  }
 /* Holiday Section */
 .upcoming-holidays {
   margin-top: 2rem;

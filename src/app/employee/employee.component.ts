@@ -30,29 +30,27 @@ export class EmployeeComponent implements OnInit {
 
 // Assuming you are using ReactiveFormsModule
 this.employeeForm = this.fb.group({
-  name: [''],
-  email: [''],
-  employeeCode: [''],
-  gender: [''],
-  location: [''],
-  department: [''],
-  manager: [''],
-  joiningDate: [null],
-  salary: [0],
-  panNumber: [''],
-  aadharNumber: [''],
-  branch: [''],
-  grade: [''],
-  designation: [''],
-  projectType: [''],
-  imageUrl: [''],
-  dateOfBirth: [null],
-  epsJoiningDate: [null],  
-  epsExitDate: [null],    
-  esicNo: [''],            
-  previousMemberId: [''], 
-   
-  epsNo: ['']             
+  name: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    employeeCode: ['', [Validators.required]],
+    gender: ['', [Validators.required]],
+    location: [''],
+    department: ['', [Validators.required]],
+    manager: [''],
+    joiningDate: ['', [Validators.required]],
+    salary: ['', [Validators.required, Validators.min(1000)]],
+    panNumber: ['', [Validators.required,Validators.pattern(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/)]],
+    aadharNumber: ['', [Validators.required,Validators.pattern(/^[2-9]{1}[0-9]{11}$/)]],
+    branch: [''],
+    grade: [''],
+    designation: ['', [Validators.required]],
+    projectType: [''],
+    dateOfBirth: ['', [Validators.required]],
+    epsJoiningDate: [''],
+    epsExitDate: [''],
+    esicNo: ['', [Validators.required,Validators.pattern(/^[0-9]{10}$/)]],
+    previousMemberId: ['',[Validators.required,Validators.pattern(/^[A-Z]{2,3}\/[A-Z]{2,3}\/\d{5,7}\/\d{3}\/\d{4,}$/)]],
+    epsNo: ['',[Validators.required,Validators.pattern(/^[A-Z]{2,3}\/[A-Z]{2,3}\/\d{5,7}\/\d{3}\/\d{4,}$/)]]             
 });
 
 

@@ -18,6 +18,7 @@ export class LeaveComponent implements OnInit {
   leaveForm!: FormGroup;
   employeeName = 'John Doe';
   employeeCode = 'EMP123';
+  static submitLeave: any;
 
   constructor(private fb: FormBuilder, private http: HttpClient) {}
 

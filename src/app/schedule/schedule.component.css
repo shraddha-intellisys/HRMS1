@@ -31,7 +31,7 @@
 .calendar-container {
   background-color: #f4f6f8;
   padding: 20px;
-  border-radius: 16px;
+  border-radius: 15px;
   box-shadow: darkorange
 }
 
@@ -165,7 +165,7 @@ body {
   padding: 20px;
   border-radius: 10px;
   background-color: var(--box-black);
-  box-shadow: 0 0 10px rgba(69, 242, 6, 0.3);
+  box-shadow: 0 0 15px 4px rgb(250, 167, 2);
 }
 
 .divleft { flex: 0 0 25%; max-width: 25%; }
@@ -198,7 +198,7 @@ button:hover {
 .calendar-container, .calendar-box {
   background-color: var(--box-black);
   border-radius: 10px;
-  box-shadow: 0 0 12px rgba(44, 222, 8, 0.4);
+  box-shadow: 0 0 15px 4px rgb(250, 167, 2);
 }
 
 /* Attendance Summary */
@@ -218,14 +218,14 @@ button:hover {
   padding: 15px;
   border-radius: 10px;
   background-color: var(--background-black);
-  box-shadow: 0 4px 8px rgba(255, 140, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(228, 129, 8, 0.3);
   color: var(--text-light);
   transition: transform 0.3s ease;
 }
 
 .attendance-box:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(255, 165, 0, 0.5);
+  box-shadow: 0 0 15px 4px rgb(250, 167, 2);
 }
 
 .status-count {
@@ -238,7 +238,7 @@ button:hover {
   /* background-color: #1a1a1a; */
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+  box-shadow: 0 0 15px 4px rgb(250, 167, 2);
   color: #ffffff;
   font-family: 'Segoe UI', sans-serif;
 }
@@ -271,7 +271,7 @@ button:hover {
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 2px 6px rgba(255, 140, 0, 0.4);
+  box-shadow: 0 2px 6px rgba(248, 143, 15, 0.4);
 }
 
 .buttons button:hover {

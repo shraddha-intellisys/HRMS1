@@ -14,7 +14,7 @@ body {
 }
 
 .add-attendance-header {
-  background-color: skyblue;
+  background-color: rgb(253, 165, 43);
   padding: 10px;
   border-radius: 3px;
   margin-bottom: 20px;
@@ -33,7 +33,7 @@ body {
 .submit-button, .cancel-button {
   padding: 10px 20px;
   border: none;
-  color: #fff;
+  color: #ffffff;
   font-size: 16px;
   border-radius: 4px;
   cursor: pointer;
@@ -117,7 +117,7 @@ body {
 }
 
 .details-table th {
-  background-color: #b6e2fb;
+  background-color: #f69031;
 }
 
 @media (max-width: 1500px) {

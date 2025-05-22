@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterModule } from '@angular/router';
 import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
-import { CalendarOptions } from '@fullcalendar/core';
+import { CalendarOptions, EventContentArg } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
@@ -36,11 +36,8 @@ import moment from 'moment';
     FormsModule
   ]
 })
-
-
 export class LeavesComponent implements OnInit, OnDestroy {
- @ViewChild('calendar') calendarComponent: FullCalendarComponent | undefined;
-
+  @ViewChild('calendar') calendarComponent: FullCalendarComponent | undefined;
 
   constructor(
     private attendanceService: AttendanceService,
@@ -53,7 +50,6 @@ export class LeavesComponent implements OnInit, OnDestroy {
     this.updateMonthOptions();
     this.viewHolidays();
     this.fetchLeaveApplications();
- // Fetch and display submitted leaves
   }
 
   ngOnDestroy(): void {}
@@ -113,52 +109,73 @@ export class LeavesComponent implements OnInit, OnDestroy {
   }
 
   calendarOptions: CalendarOptions = {
-  plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
-  initialView: 'dayGridMonth',
-  headerToolbar: {
-    left: 'prev,today,prevYear',
-    center: 'title',
-    right: 'nextYear,dayGridMonth,timeGridWeek,timeGridDay,next'
-  },
-  events: [], // Events will be loaded dynamically
-  dateClick: this.onDateClick.bind(this),
-  dayCellDidMount: (info) => {
-    info.el.style.cursor = 'pointer';
-    if (info.date.getDay() === 6 || info.date.getDay() === 0) {
-      info.el.style.backgroundColor = 'white';
-      info.el.style.color = '#d9534f';
+    plugins: [dayGridPlugin, interactionPlugin],
+    initialView: 'dayGridMonth',
+    events: [],
+    eventContent: this.renderEventContent.bind(this),
+    headerToolbar: {
+      left: 'prev,today',
+      center: 'title',
+      right: 'next'
+    },
+    dateClick: this.onDateClick.bind(this),
+    dayCellDidMount: (info) => {
+      info.el.style.cursor = 'pointer';
+      if (info.date.getDay() === 6 || info.date.getDay() === 0) {
+        info.el.style.backgroundColor = 'white';
+        info.el.style.color = '#d9534f';
+      }
+    }
+  };
+
+  renderEventContent(arg: EventContentArg): { html: string } {
+    try {
+      const data = JSON.parse(arg.event.title);
+      return {
+        html: `
+          <div style="line-height: 1.2; font-size: 0.75rem;">
+            ${data.lws ? `<div style="color: blue;">leave Submit</div>` : ''}
+          </div>
+        `
+      };
+    } catch {
+      return { html: `<div>${arg.event.title}</div>` };
     }
   }
-};
 
+  fetchLeaveApplications(): void {
+    this.leavesService.getAllLeaves().subscribe({
+      next: (leaveApplications) => {
+        const events: any[] = [];
 
-  // leaves.component.ts
-fetchLeaveApplications(): void {
-  this.leavesService.getAllLeaves().subscribe({
-    next: (leaveApplications) => {
-      const events = leaveApplications.map((app: any) => ({
-        title: 'Leave Submitted',
-        start: app.fromDate,
-        end: moment(app.toDate).add(1, 'days').format('YYYY-MM-DD'), // end is exclusive
-        backgroundColor: '#2196f3',
-        textColor: 'white',
-        display: 'auto'
-      }));
-      this.calendarOptions = {
-        ...this.calendarOptions,
-        events: events
-      };
-    },
-    error: (err) => {
-      console.error('Error fetching leave applications:', err);
-    }
-  });
-}
+        leaveApplications.forEach((leave: any) => {
+          const start = moment(leave.fromDate);
+          const end = moment(leave.toDate);
+          const days = end.diff(start, 'days') + 1;
 
+          for (let i = 0; i < days; i++) {
+            const date = start.clone().add(i, 'days').format('YYYY-MM-DD');
+            events.push({
+              title: JSON.stringify({ lws: 'LWS' }),
+              start: date,
+              textColor: 'purple',
+              display: 'block'
+            });
+          }
+        });
 
+        this.calendarOptions = {
+          ...this.calendarOptions,
+          events
+        };
 
-
-
+        console.log('✅ Leave Events Loaded:', events);
+      },
+      error: (err) => {
+        console.error('❌ Error loading leaves:', err);
+      }
+    });
+  }
 
   onDateClick(event: any): void {
     if (event.dateStr) {
@@ -180,7 +197,6 @@ fetchLeaveApplications(): void {
   refresh(): void {
     console.log('Refresh clicked. Date:', this.attendanceDate);
     this.fetchLeaveApplications();
-; // Re-fetch on refresh
   }
 
   handleCardClick(card: any): void {
@@ -204,35 +220,34 @@ fetchLeaveApplications(): void {
   ];
 
   submitLeaveApplication(): void {
-  if (!this.startDate || !this.endDate) {
-    alert('Please select both start and end dates.');
-    return;
-  }
-
-  const leaveApplication = {
-    applicationDate: new Date(),
-    applicationType: 'Leave Application',
-    leaveType: 'Privileged Leave',
-    fromDate: this.startDate,
-    toDate: this.endDate,
-    reason: 'Personal Work',
-    remarks: 'NA',
-    ccEmail: 'someone@example.com'
-  };
-
-  this.leavesService.submitLeave(leaveApplication).subscribe({
-    next: (res) => {
-      console.log('✅ Leave Submitted:', res);
-      alert('✅ Leave application submitted successfully!');
-      this.fetchLeaveApplications(); // Refresh calendar events
-    },
-    error: (err) => {
-      console.error('❌ Error submitting leave:', err);
-      alert('❌ Failed to submit leave.');
+    if (!this.startDate || !this.endDate) {
+      alert('Please select both start and end dates.');
+      return;
     }
-  });
-}
 
+    const leaveApplication = {
+      applicationDate: new Date(),
+      applicationType: 'Leave Application',
+      leaveType: 'Privileged Leave',
+      fromDate: this.startDate,
+      toDate: this.endDate,
+      reason: 'Personal Work',
+      remarks: 'NA',
+      ccEmail: 'someone@example.com'
+    };
+
+    this.leavesService.submitLeave(leaveApplication).subscribe({
+      next: (res) => {
+        console.log('✅ Leave Submitted:', res);
+        alert('✅ Leave application submitted successfully!');
+        this.fetchLeaveApplications();
+      },
+      error: (err) => {
+        console.error('❌ Error submitting leave:', err);
+        alert('❌ Failed to submit leave.');
+      }
+    });
+  }
 
   viewHolidays(): void {
     this.leavesService.getHolidays().subscribe({

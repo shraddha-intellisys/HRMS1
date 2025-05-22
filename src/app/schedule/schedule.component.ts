@@ -69,8 +69,8 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
   attendanceByDate: {
     [date: string]: {
-      pbm: string; pbmTime?: string; markIn?: string; markOut?: string 
-}
+      pbm: string; pbmTime?: string; markIn?: string; markOut?: string; lws?: string; phy?: string;
+    }
   } = {};
 
   calendarOptions: CalendarOptions = {
@@ -85,13 +85,15 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     private router: Router,
     private http: HttpClient,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.updateTime();
     this.timerInterval = setInterval(() => this.updateTime(), 1000);
     this.fetchPBMEvents();
+    this.loadHolidayEvents();
   }
+
 
   fetchPBMEvents(): void {
     this.http.get<any[]>('http://localhost:5000/api/pbm')
@@ -100,15 +102,17 @@ export class ScheduleComponent implements OnInit, OnDestroy {
           const pbmMap = events.reduce((acc, e) => {
             acc[e.applicationDate] = {
               ...acc[e.applicationDate],
-              pbmTime: `${e.startTime} - ${e.endTime}`
+              pbmTime: `${e.startTime} - ${e.endTime}`,
+              phy: 'PHY'
             };
             return acc;
           }, {} as { [date: string]: any });
-  
+
           for (const date in pbmMap) {
             this.attendanceByDate[date] = {
               ...(this.attendanceByDate[date] || {}),
-              pbmTime: pbmMap[date].pbmTime
+              pbmTime: pbmMap[date].pbmTime,
+               phy: pbmMap[date].phy
             };
             this.updateCalendarEvent(date);
           }
@@ -118,20 +122,49 @@ export class ScheduleComponent implements OnInit, OnDestroy {
         }
       });
   }
-  
-  
+
+holidays: { date: Date, name: string }[] = [
+    { date: new Date('2025-03-08'), name: 'International Women\'s Day' },
+    { date: new Date('2025-03-29'), name: 'Good Friday' },
+    { date: new Date('2025-04-14'), name: 'Tamil New Year' },
+    { date: new Date('2025-04-21'), name: 'Ram Navami' },
+    { date: new Date('2025-05-01'), name: 'Labour Day' },
+    { date: new Date('2025-08-15'), name: 'Independence Day' },
+    { date: new Date('2025-10-02'), name: 'Gandhi Jayanti' },
+    { date: new Date('2025-11-01'), name: 'Diwali' },
+    { date: new Date('2025-12-25'), name: 'Christmas' },
+    { date: new Date('2025-04-09'), name: 'Shraddha bday'}
+  ];
+
+loadHolidayEvents(): void {
+  const holidayEvents = this.holidays.map(holiday => ({
+    title: JSON.stringify({ holiday: holiday.name }),
+    date: holiday.date,
+    textColor: '#ff4d4d',
+    display: 'block'
+  }));
+
+  this.calendarOptions = {
+    ...this.calendarOptions,
+    events: [...(this.calendarOptions.events as any[]), ...holidayEvents]
+  };
+
+  console.log('✅ Holidays pushed to calendar:', holidayEvents);
+}
+
+
 
   updateCalendarPBM(date: string): void {
     const existingEvents = [...(this.calendarOptions.events as any[])];
     const filteredEvents = existingEvents.filter(e => e.date !== date);
-  
+
     filteredEvents.push({
       title: JSON.stringify({ pbm: 'PBM' }),
       date,
-      textColor: 'blue',
+      textColor: 'red',
       display: 'auto'
     });
-  
+
     this.calendarOptions.events = filteredEvents;
   }
 
@@ -201,17 +234,19 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   }
 
   updateCalendarEvent(date: string): void {
+    const attendance = this.attendanceByDate[date];
     const existingEvents = [...(this.calendarOptions.events as any[])];
     const filteredEvents = existingEvents.filter(e => e.date !== date);
 
-    const attendance = this.attendanceByDate[date];
-    let textColor: string = 'red';
+    let textColor = 'red';
 
     if (attendance.markIn && attendance.markOut) {
       const markInMoment = moment(attendance.markIn, 'hh:mm:ss A');
       const markOutMoment = moment(attendance.markOut, 'hh:mm:ss A');
       const diffInSeconds = markOutMoment.diff(markInMoment, 'seconds');
       textColor = diffInSeconds >= 3 ? 'green' : 'red';
+    } else if (attendance.lws) {
+      textColor = 'blue';
     }
 
     const title = JSON.stringify(attendance);
@@ -220,29 +255,45 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       title,
       date,
       textColor,
-      display: 'auto',
-      pbm: attendance.pbm ? 'PBM' : undefined
+      display: 'block'  // ✅ required for visible rendering
     });
 
-    this.calendarOptions.events = filteredEvents;
+    this.calendarOptions = {
+      ...this.calendarOptions,
+      events: filteredEvents
+    };
+
+    console.log('✅ Event pushed for:', date, title);
   }
+
+
+
+
+
+
 
   renderEventContent(arg: EventContentArg): { html: string } {
     try {
       const data = JSON.parse(arg.event.title);
       return {
         html: `
-          <div style="line-height: 1.2; font-size: 0.75rem;">
-            ${data.markIn ? `<div>${data.markIn}</div>` : ''}
-            ${data.markOut ? `<div>${data.markOut}</div>` : ''}
-            ${data.pbmTime ? `<div style="color: blue;">${data.pbmTime}</div>` : ''}
-          </div>
-        `
+        <div style="line-height: 1.2; font-size: 0.75rem;">
+          ${data.markIn ? `<div>${data.markIn}</div>` : ''}
+          ${data.markOut ? `<div>${data.markOut}</div>` : ''}
+          ${data.pbmTime ? `<div style="color: orange;">${data.pbmTime}</div>` : ''}
+          ${data.phy ? `<div style="color: gray; font-weight: bold;">${data.phy}</div>` : ''}
+           ${data.holiday ? `<div style="color:rgb(238, 15, 171); font-weight: bold;">${data.holiday}</div>` : ''}
+        </div>
+      `
       };
     } catch (e) {
       return { html: `<div>${arg.event.title}</div>` };
     }
   }
+
+
+
+
 
   onDateClick(info: any): void {
     const clickedDate = info.dateStr;

@@ -79,14 +79,24 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="panNumber">PAN Number</label>
-                    <input id="panNumber" formControlName="panNumber" type="text" placeholder="PAN Number" />
-                </div>
+  <label for="panNumber">PAN Number</label>
+  <input id="panNumber" formControlName="panNumber" type="text" placeholder="PAN Number" />
+  <div *ngIf="employeeForm.get('panNumber')?.touched && employeeForm.get('panNumber')?.invalid" class="error">
+    <small *ngIf="employeeForm.get('panNumber')?.errors?.['required']">PAN Number is required</small>
+    <small *ngIf="employeeForm.get('panNumber')?.errors?.['pattern']">Invalid PAN format (e.g., ABCDE1234F)</small>
+  </div>
+</div>
+
 
                 <div class="form-group">
-                    <label for="aadharNumber">Aadhar Number</label>
-                    <input id="aadharNumber" formControlName="aadharNumber" type="text" placeholder="Aadhar Number" />
-                </div>
+  <label for="aadharNumber">Aadhar Number</label>
+  <input id="aadharNumber" formControlName="aadharNumber" type="text" placeholder="Aadhar Number" maxlength="12" />
+  <div *ngIf="employeeForm.get('aadharNumber')?.touched && employeeForm.get('aadharNumber')?.invalid" class="error">
+    <small *ngIf="employeeForm.get('aadharNumber')?.errors?.['required']">Aadhar Number is required</small>
+    <small *ngIf="employeeForm.get('aadharNumber')?.errors?.['pattern']">Invalid Aadhar format (12 digits only)</small>
+  </div>
+</div>
+
 
                 <div class="form-group">
                     <label for="branch">Branch</label>
@@ -130,20 +140,39 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="esicNo">ESIC NO</label>
-                    <input id="esicNo" formControlName="esicNo" type="text" placeholder="ESIC NO" />
-                </div>
+  <label for="esicNo">ESIC Number</label>
+  <input id="esicNo" formControlName="esicNo" type="text" placeholder="ESIC Number" maxlength="10" />
+  <div *ngIf="employeeForm.get('esicNo')?.touched && employeeForm.get('esicNo')?.invalid" class="error">
+    <small *ngIf="employeeForm.get('esicNo')?.errors?.['required']">ESIC Number is required</small>
+    <small *ngIf="employeeForm.get('esicNo')?.errors?.['pattern']">ESIC Number must be exactly 10 digits</small>
+  </div>
+</div>
+
 
                 <div class="form-group">
-                    <label for="previousMemberId">Prv Member ID</label>
-                    <input id="previousMemberId" formControlName="previousMemberId" type="text" placeholder="Prv Member ID" />
-                </div>
+  <label for="previousMemberId">Previous Member ID</label>
+  <input id="previousMemberId" formControlName="previousMemberId" type="text" placeholder="Previous Member ID" />
+  <div *ngIf="employeeForm.get('previousMemberId')?.touched && employeeForm.get('previousMemberId')?.invalid" class="error">
+    <small *ngIf="employeeForm.get('previousMemberId')?.errors?.['required']">Previous Member ID is required</small>
+    <small *ngIf="employeeForm.get('previousMemberId')?.errors?.['pattern']">
+      Invalid format (e.g., MH/PUN/1234567/000/1234)
+    </small>
+  </div>
+</div>
+
 
            
                 <div class="form-group">
-                    <label for="epsNo">EPS NO</label>
-                    <input id="epsNo" formControlName="epsNo" type="text" placeholder="EPS NO" />
-                </div>
+  <label for="epsNo">EPS Number</label>
+  <input id="epsNo" formControlName="epsNo" type="text" placeholder="EPS Number" />
+  <div *ngIf="employeeForm.get('epsNo')?.touched && employeeForm.get('epsNo')?.invalid" class="error">
+    <small *ngIf="employeeForm.get('epsNo')?.errors?.['required']">EPS Number is required</small>
+    <small *ngIf="employeeForm.get('epsNo')?.errors?.['pattern']">
+      Invalid EPS Number format (e.g., TN/MAS/1234567/000/1234)
+    </small>
+  </div>
+</div>
+
 
                 <button type="submit">Submit</button>
             </form>
