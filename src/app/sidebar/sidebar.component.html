@@ -4,6 +4,9 @@
       <h3 class="title">HRMThread</h3>
     </div>
     <ul>
+
+      
+
       <!-- Home Section -->
       <li>
         <a href="javascript:void(0);" (click)="toggleDropdown('home')">
@@ -42,7 +45,8 @@
           <li><a href="#">Salary History</a></li>
         </ul>
       </li>
-      <li><a href="#"><span>🚪</span> Apply Exit</a></li>
+      <li><a [routerLink]="['/resignation']"><span>🚪</span> Apply Exit</a></li>
+
       <li><a href="#"><span>📊</span> Organisation Chart</a></li>
       <li><a [routerLink]="['/employee']"><span>✅</span> Employee-Registration</a></li>
     </ul>

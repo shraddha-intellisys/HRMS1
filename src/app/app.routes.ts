@@ -11,6 +11,9 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { Holiday } from './holiday/holiday.component';
+import { ResignationComponent } from './resignation/resignation.component';
+import { AdminLoginComponent } from './adminlogin/adminlogin.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -25,5 +28,8 @@ export const routes: Routes = [
 {path:'leaves',component:LeavesComponent},
 {path:'employee',component:EmployeeComponent},
 {path:'holiday',component:Holiday},
+{ path: 'resignation', component: ResignationComponent },
+{ path: 'adminlogin', component: AdminLoginComponent },
+{ path: 'dashboard', component: DashboardComponent },
     ]
  

@@ -7,8 +7,9 @@
     font-family: Arial, sans-serif;
   }
   
+  
   .add-leave-header {
-    background-color: black;
+    background-color: rgb(246, 130, 42);
     padding: 5px;
     border-radius: 3px;
     width: 100%;
@@ -35,7 +36,7 @@
   
   .leave-container h2 {
     margin-top: -36px;
-    color: #fff;
+    color: #171515;
   }
   
   .right-section {

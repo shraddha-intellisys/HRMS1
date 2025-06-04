@@ -40,7 +40,7 @@
 
         <div class="form-group">
           <label>From:</label>
-          <input type="date" formControlName="fromDate" class="form-control custom-date-input">
+          <input type="date" formControlName="fromDate" class="form-control custom-date-input" [attr.min]="minDate" />
           <div class="checkbox-group">
             <label><input type="checkbox" formControlName="fromHalf"> From Date Half</label>
             <label><input type="checkbox" formControlName="firstHalfFrom"> First Half</label>
@@ -50,11 +50,14 @@
 
         <div class="form-group">
           <label>To:</label>
-          <input type="date" formControlName="toDate" class="form-control custom-date-input">
+          <input type="date" formControlName="toDate" class="form-control custom-date-input" [attr.min]="minDate" />
           <div class="checkbox-group">
             <label><input type="checkbox" formControlName="toHalf"> To Date Half</label>
             <label><input type="checkbox" formControlName="firstHalfTo"> First Half</label>
           </div>
+          <div class="error-message" *ngIf="leaveForm.get('toDate')?.hasError('notFutureDate') && leaveForm.get('toDate')?.touched">
+    ❌ To Date must be a future date.
+  </div>
         </div>
 
         <div class="form-group1">

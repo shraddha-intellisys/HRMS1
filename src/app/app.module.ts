@@ -15,14 +15,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { ScheduleComponent } from './schedule/schedule.component';
-// import { ScheduleComponent } from './app/schedule/schedule.component'; 
+import { ResignationComponent } from './resignation/resignation.component';
+import { AdminLoginComponent } from './adminlogin/adminlogin.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NgChartsModule } from 'ng2-charts';
 
-// Custom Routing Module (if needed)
-// import { AppRoutingModule } from '../app-routing/app-routing.module';
-// import { ScheduleComponent } from '../schedule/schedule.component';
 
-// Import the calendar component (you'll build this)
-// import {  ScheduleComponent } from './Schedule.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +41,10 @@ import { ScheduleComponent } from './schedule/schedule.component';
     MatNativeDateModule,
     HttpClientModule,
     ScheduleComponent,
+    ResignationComponent,
+    AdminLoginComponent,
+    DashboardComponent,
+    NgChartsModule,
   ],
   
   

@@ -1,0 +1,22 @@
+<div class="resignation-wrapper">
+  <h2>Resignation Form</h2>
+
+  <form [formGroup]="resignationForm" (ngSubmit)="submitResignation()">
+    <label>Employee Code</label>
+    <input formControlName="employeeCode" type="text" placeholder="Enter Employee Code">
+
+    <label>Employee Name</label>
+    <input formControlName="employeeName" type="text" placeholder="Enter Name">
+
+    <label>Department</label>
+    <input formControlName="department" type="text" placeholder="Enter Department">
+
+    <label>Last Working Day</label>
+    <input formControlName="lastWorkingDate" type="date">
+
+    <label>Reason for Exit</label>
+    <textarea formControlName="reason" placeholder="Enter reason"></textarea>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>

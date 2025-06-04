@@ -111,31 +111,36 @@
 
 .fc-day.fc-day-just-in {
   background-color: red !important;
-  color: white; /* Optional: Ensure the text is visible */
+  color: white; 
 }
 
 .fc-day.fc-day-just-out {
   background-color: green !important;
-  color: white; /* Optional: Ensure the text is visible */
+  color: white; 
 }
 
 .fc-day.marked-in {
   background-color: red !important;
-  color: white; /* Text white for visibility */
+  color: white; 
 }
 
 .fc-day.marked-out {
   background-color: green !important;
-  color: white; /* Text white for visibility */
+  color: white; 
 }
 
-/* Optional: Hover effect for calendar cells */
+
 .fc-day:hover {
   filter: brightness(0.95);
 }
 
 .fc-event {
-  background: transparent !important;  /* ✅ Remove background */
+  background: transparent !important;  
   border: none !important;
   padding: 2px;
+}
+
+:host ::ng-deep .fc-scroller {
+  overflow: visible !important;
+  height: auto !important;
 }

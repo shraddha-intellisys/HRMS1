@@ -25,6 +25,7 @@ export interface Employee {
   epsExitDate?: string;
   esicNumber?: string;
   prvMemberID?: string;
+  status?: string;
 }
 
 @Injectable({
@@ -120,10 +121,11 @@ export class EmployeeService {
 
   // ✅ Update existing employee profile
   updateEmployee(id: string, data: any): Observable<Employee> {
-    const headers = this.getAuthHeaders();
-    if (!headers) return of({} as Employee);
-    return this.http.put<Employee>(`${this.baseUrl}/update/${id}`, data, { headers });
-  }
+  const headers = this.getAuthHeaders();
+  if (!headers) return of({} as Employee);
+  return this.http.put<Employee>(`${this.baseUrl}/update/${id}`, data, { headers });
+}
+
   getProfile() {
     return this.http.get('/api/employee/profile'); // adjust endpoint if needed
   }
@@ -143,4 +145,6 @@ export class EmployeeService {
     localStorage.removeItem('profileData');
     localStorage.removeItem('employeeId');
   }
+
+  
 }

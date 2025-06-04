@@ -80,6 +80,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     eventContent: this.renderEventContent.bind(this),
     dateClick: this.onDateClick.bind(this)
   };
+  durationTime: string | undefined;
 
   constructor(
     private router: Router,
@@ -92,7 +93,29 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     this.timerInterval = setInterval(() => this.updateTime(), 1000);
     this.fetchPBMEvents();
     this.loadHolidayEvents();
+    this.loadAttendanceRecords();
   }
+
+  loadAttendanceRecords(): void {
+  this.http.get<any[]>(`http://localhost:5000/api/attendance/all/${this.employeeCode}`)
+    .subscribe({
+      next: (records) => {
+        records.forEach((rec: any) => {
+          const date = moment(rec.date).format('YYYY-MM-DD');
+          this.attendanceByDate[date] = {
+            ...(this.attendanceByDate[date] || {}),
+            markIn: rec.markIn,
+            markOut: rec.markOut,
+            ...(rec.lateMark ? { lateMark: 'Late Mark' } : {})
+          };
+          this.updateCalendarEvent(date);
+        });
+      },
+      error: (err) => {
+        console.error('❌ Attendance fetch error:', err);
+      }
+    });
+}
 
 
   fetchPBMEvents(): void {
@@ -185,26 +208,35 @@ loadHolidayEvents(): void {
   }
 
   onMarkInTime(): void {
-    const today = moment().format('YYYY-MM-DD');
-    const time = moment().format('hh:mm:ss A');
+  const today = moment().format('YYYY-MM-DD');
+  const time = moment().format('hh:mm:ss A');
 
-    this.http.post('http://localhost:5000/api/attendance/mark-in', {
-      employeeCode: this.employeeCode
-    }).subscribe({
-      next: (res: any) => {
-        this.markInTime = time;
-        this.attendanceByDate[today] = {
-          ...(this.attendanceByDate[today] || {}),
-          markIn: time
-        };
-        this.updateCalendarEvent(today);
-        console.log('✅ Mark In Success:', res);
-      },
-      error: err => {
-        console.error('❌ Mark In API Error:', err);
-      }
-    });
-  }
+  const markInMoment = moment(time, 'hh:mm:ss A');
+  const lateThreshold = moment('09:30:00 AM', 'hh:mm:ss A');
+
+  const isLate = markInMoment.isAfter(lateThreshold);
+
+  this.http.post('http://localhost:5000/api/attendance/mark-in', {
+    employeeCode: this.employeeCode
+  }).subscribe({
+    next: (res: any) => {
+      this.markInTime = time;
+      this.attendanceByDate[today] = {
+        ...(this.attendanceByDate[today] || {}),
+        markIn: time,
+        ...(isLate ? { lateMark: 'Late Mark' } : {})
+      };
+      localStorage.setItem('attendanceByDate', JSON.stringify(this.attendanceByDate));
+
+      this.updateCalendarEvent(today);
+      console.log('✅ Mark In Success:', res);
+    },
+    error: err => {
+      console.error('❌ Mark In API Error:', err);
+    }
+  });
+}
+
 
   onMarkOutTime(): void {
     const today = moment().format('YYYY-MM-DD');
@@ -220,10 +252,17 @@ loadHolidayEvents(): void {
     }).subscribe({
       next: (res: any) => {
         this.markOutTime = time;
+
+this.durationTime = moment.utc(
+        moment(time, 'hh:mm:ss A').diff(moment(this.markInTime, 'hh:mm:ss A'))
+      ).format('HH:mm:ss');
+
         this.attendanceByDate[today] = {
           ...(this.attendanceByDate[today] || {}),
           markOut: time
         };
+        localStorage.setItem('attendanceByDate', JSON.stringify(this.attendanceByDate));
+
         this.updateCalendarEvent(today);
         console.log('✅ Mark Out Success:', res);
       },
@@ -283,6 +322,8 @@ loadHolidayEvents(): void {
           ${data.pbmTime ? `<div style="color: orange;">${data.pbmTime}</div>` : ''}
           ${data.phy ? `<div style="color: gray; font-weight: bold;">${data.phy}</div>` : ''}
            ${data.holiday ? `<div style="color:rgb(238, 15, 171); font-weight: bold;">${data.holiday}</div>` : ''}
+           ${data.lateMark ? `<div style="color: red; font-weight: bold;">${data.lateMark}</div>` : ''}
+
         </div>
       `
       };

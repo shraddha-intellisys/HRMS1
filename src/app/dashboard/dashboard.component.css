@@ -1,0 +1,111 @@
+.dashboard-container {
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f9f9f9;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logout-button {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.stat-cards {
+  display: flex;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.card {
+  flex: 1;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card span {
+  font-size: 22px;
+}
+
+.card.blue {
+  background: #4a90e2;
+}
+
+.card.green {
+  background: #57c87b;
+}
+
+.card.orange {
+  background: #f4a261;
+}
+
+.card.purple {
+  background: #a78bfa;
+}
+
+.charts {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.chart-card {
+  background: white;
+  flex: 1;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+}
+
+.employee-table {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.search-box {
+  float: right;
+  margin-bottom: 10px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+thead {
+  background: #f3f3f3;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+}
+
+.active {
+  color: green;
+  font-weight: bold;
+}
+
+.inactive {
+  color: gray;
+  font-weight: bold;
+}

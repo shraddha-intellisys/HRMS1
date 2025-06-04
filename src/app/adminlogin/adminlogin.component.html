@@ -1,0 +1,9 @@
+<div class="auth-box">
+  <h2>Admin Login</h2>
+  <form (ngSubmit)="submit()">
+    <input [(ngModel)]="form.username" name="username" placeholder="Username" required />
+    <input [(ngModel)]="form.password" name="password" type="password" placeholder="Password" required />
+    <button type="submit">Login</button>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  </form>
+</div>

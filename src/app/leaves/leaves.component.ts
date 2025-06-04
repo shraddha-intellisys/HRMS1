@@ -143,39 +143,53 @@ export class LeavesComponent implements OnInit, OnDestroy {
     }
   }
 
-  fetchLeaveApplications(): void {
-    this.leavesService.getAllLeaves().subscribe({
-      next: (leaveApplications) => {
-        const events: any[] = [];
+  pendingLeaves: any[] = [];
 
-        leaveApplications.forEach((leave: any) => {
-          const start = moment(leave.fromDate);
-          const end = moment(leave.toDate);
-          const days = end.diff(start, 'days') + 1;
+fetchLeaveApplications(): void {
+  this.leavesService.getAllLeaves().subscribe({
+    next: (leaveApplications) => {
+      this.pendingLeaves = leaveApplications.filter(l => l.status === 'Pending');
 
-          for (let i = 0; i < days; i++) {
-            const date = start.clone().add(i, 'days').format('YYYY-MM-DD');
-            events.push({
-              title: JSON.stringify({ lws: 'LWS' }),
-              start: date,
-              textColor: 'purple',
-              display: 'block'
-            });
-          }
-        });
+      const approvedLeaves = leaveApplications.filter(l => l.status === 'Approved');
 
-        this.calendarOptions = {
-          ...this.calendarOptions,
-          events
-        };
+      const events: any[] = [];
 
-        console.log('✅ Leave Events Loaded:', events);
-      },
-      error: (err) => {
-        console.error('❌ Error loading leaves:', err);
-      }
-    });
-  }
+      approvedLeaves.forEach((leave: any) => {
+        const start = moment(leave.fromDate);
+        const end = moment(leave.toDate);
+        const totalDays = end.diff(start, 'days') + 1;
+
+        for (let i = 0; i < totalDays; i++) {
+          const date = start.clone().add(i, 'days').format('YYYY-MM-DD');
+          events.push({
+            title: JSON.stringify({ lws: 'Submitted Leave' }),
+            start: date,
+            textColor: 'blue',
+            display: 'block'
+          });
+        }
+      });
+
+      
+      this.calendarOptions = {
+        ...this.calendarOptions,
+        events
+      };
+    },
+    error: (err) => {
+      console.error('Error fetching leave applications:', err);
+    }
+  });
+}
+
+
+approveLeave(id: string): void {
+  this.leavesService.approveLeave(id).subscribe(() => {
+    alert('✅ Leave approved');
+    this.fetchLeaveApplications();
+  });
+}
+
 
   onDateClick(event: any): void {
     if (event.dateStr) {
@@ -220,34 +234,53 @@ export class LeavesComponent implements OnInit, OnDestroy {
   ];
 
   submitLeaveApplication(): void {
-    if (!this.startDate || !this.endDate) {
-      alert('Please select both start and end dates.');
-      return;
-    }
-
-    const leaveApplication = {
-      applicationDate: new Date(),
-      applicationType: 'Leave Application',
-      leaveType: 'Privileged Leave',
-      fromDate: this.startDate,
-      toDate: this.endDate,
-      reason: 'Personal Work',
-      remarks: 'NA',
-      ccEmail: 'someone@example.com'
-    };
-
-    this.leavesService.submitLeave(leaveApplication).subscribe({
-      next: (res) => {
-        console.log('✅ Leave Submitted:', res);
-        alert('✅ Leave application submitted successfully!');
-        this.fetchLeaveApplications();
-      },
-      error: (err) => {
-        console.error('❌ Error submitting leave:', err);
-        alert('❌ Failed to submit leave.');
-      }
-    });
+  if (!this.startDate || !this.endDate) {
+    alert('Please select both start and end dates.');
+    return;
   }
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // remove time
+
+  const from = new Date(this.startDate);
+  const to = new Date(this.endDate);
+  from.setHours(0, 0, 0, 0);
+  to.setHours(0, 0, 0, 0);
+
+  if (from <= today || to <= today) {
+    alert('❌ Leave dates must be after today.');
+    return;
+  }
+
+  if (from > to) {
+    alert('❌ From Date cannot be after To Date.');
+    return;
+  }
+
+  const leaveApplication = {
+    applicationDate: new Date(),
+    applicationType: 'Leave Application',
+    leaveType: 'Privileged Leave',
+    fromDate: this.startDate,
+    toDate: this.endDate,
+    reason: 'Personal Work',
+    remarks: 'NA',
+    ccEmail: 'someone@example.com'
+  };
+
+  this.leavesService.submitLeave(leaveApplication).subscribe({
+    next: (res) => {
+      console.log('✅ Leave Submitted:', res);
+      alert('✅ Leave application submitted successfully!');
+      this.fetchLeaveApplications();
+    },
+    error: (err) => {
+      console.error('❌ Error submitting leave:', err);
+      alert('❌ Failed to submit leave.');
+    }
+  });
+}
+
 
   viewHolidays(): void {
     this.leavesService.getHolidays().subscribe({
