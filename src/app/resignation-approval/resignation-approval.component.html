@@ -1,0 +1,122 @@
+<div class="approval-container">
+  <h2 class="heading">Resignation Approval Requests</h2>
+
+  <div *ngFor="let request of resignationRequests; let i = index" class="notification-card">
+    <div class="notification-header" (click)="toggleRequest(i)">
+      <strong>{{ request.empName }}</strong> ({{ request.empCode }})
+    </div>
+
+    <div *ngIf="request.expanded" class="request-details">
+      <div class="form-group">
+        <label>Employee Code:</label>
+        <input type="text" [(ngModel)]="request.empCode" placeholder="Enter Employee Code" readonly />
+      </div>
+
+      <div class="form-group">
+        <label>Employee Name:</label>
+        <input type="text" [(ngModel)]="request.empName" placeholder="Enter Name" readonly />
+      </div>
+
+      <div class="form-group">
+        <label>Department:</label>
+        <input type="text" [(ngModel)]="request.department" placeholder="Enter Department" readonly />
+      </div>
+
+      <div class="form-group">
+        <label>Last Working Day:</label>
+        <input type="date" [(ngModel)]="request.lastWorkingDay" />
+      </div>
+
+      <div class="form-group">
+        <label>Reason for Exit:</label>
+        <textarea rows="3" [(ngModel)]="request.reason" placeholder="Enter reason"></textarea>
+      </div>
+
+      <div class="action-buttons">
+        <button (click)="approveResignation(i)">✅ Approve</button>
+        <button (click)="rejectResignation(i)">❌ Reject</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="history-section">
+  <h2 class="heading">Resignation History</h2>
+  
+  <div class="history-tabs">
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'approved'"
+      (click)="activeTab = 'approved'">
+      Approved Resignations
+    </button>
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'rejected'"
+      (click)="activeTab = 'rejected'">
+      Rejected Resignations
+    </button>
+  </div>
+
+  <!-- Approved Resignations Table -->
+  <div *ngIf="activeTab === 'approved'" class="history-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Employee Code</th>
+          <th>Employee Name</th>
+          <th>Department</th>
+          <th>Last Working Day</th>
+          <th>Reason</th>
+          <th>Approved On</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let resignation of approvedResignations">
+          <td>{{ resignation.empCode }}</td>
+          <td>{{ resignation.empName }}</td>
+          <td>{{ resignation.department }}</td>
+          <td>{{ resignation.lastWorkingDay | date:'dd/MM/yyyy' }}</td>
+          <td>{{ resignation.reason }}</td>
+          <td>{{ resignation.approvedDate | date:'dd/MM/yyyy' }}</td>
+          <td><span class="status-badge approved">Approved</span></td>
+        </tr>
+        <tr *ngIf="approvedResignations.length === 0">
+          <td colspan="7" class="no-data">No approved resignations found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Rejected Resignations Table -->
+  <div *ngIf="activeTab === 'rejected'" class="history-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Employee Code</th>
+          <th>Employee Name</th>
+          <th>Department</th>
+          <th>Last Working Day</th>
+          <th>Reason</th>
+          <th>Rejected On</th>
+          <th>Rejection Reason</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let resignation of rejectedResignations">
+          <td>{{ resignation.empCode }}</td>
+          <td>{{ resignation.empName }}</td>
+          <td>{{ resignation.department }}</td>
+          <td>{{ resignation.lastWorkingDay | date:'dd/MM/yyyy' }}</td>
+          <td>{{ resignation.reason }}</td>
+          <td>{{ resignation.rejectedDate | date:'dd/MM/yyyy' }}</td>
+          <td>{{ resignation.rejectionReason || 'Not specified' }}</td>
+        </tr>
+        <tr *ngIf="rejectedResignations.length === 0">
+          <td colspan="7" class="no-data">No rejected resignations found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

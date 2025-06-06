@@ -14,6 +14,10 @@ import { Holiday } from './holiday/holiday.component';
 import { ResignationComponent } from './resignation/resignation.component';
 import { AdminLoginComponent } from './adminlogin/adminlogin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AttendanceApprovalComponent } from './attendance-approval/attendance-approval.component';
+import { LeavesApprovalComponent } from './leaves-approval/leaves-approval.component';
+import { ResignationApprovalComponent } from './resignation-approval/resignation-approval.component';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -31,5 +35,9 @@ export const routes: Routes = [
 { path: 'resignation', component: ResignationComponent },
 { path: 'adminlogin', component: AdminLoginComponent },
 { path: 'dashboard', component: DashboardComponent },
+{ path: 'attendance-approval', component: AttendanceApprovalComponent},
+{ path: 'leaves-approval', component: LeavesApprovalComponent},
+{path : 'resignation-approval', component: ResignationApprovalComponent}
+
     ]
  

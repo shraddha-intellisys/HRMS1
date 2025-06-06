@@ -1,0 +1,119 @@
+<div class="approval-container">
+  <!-- Employee Requests Section -->
+  <h2 class="heading">Request for Manual Attendance Approval</h2>
+
+  <div *ngFor="let request of requests; let i = index" class="notification-card">
+    <div class="notification-header" (click)="toggleRequest(i)">
+      <strong>{{ request.empName }}</strong> ({{ request.empId }})
+    </div>
+
+    <div *ngIf="request.expanded" class="request-details">
+      <p><strong>Application Date:</strong> 04/06/2025</p>
+      <p><strong>Application Type:</strong> Manual Attendance</p>
+      <p><strong>Type:</strong> Full Day</p>
+      <p><strong>Available Leave Balance:</strong> 25</p>
+
+      <div class="date-section">
+        <label>From:</label>
+        <input type="date" />
+        <select>
+          <option>First Half</option>
+          <option>Second Half</option>
+        </select>
+      </div>
+
+      <div class="date-section">
+        <label>To:</label>
+        <input type="date" />
+        <select>
+          <option>First Half</option>
+          <option>Second Half</option>
+        </select>
+      </div>
+
+      <label>Reason:</label>
+      <textarea rows="2" placeholder="Enter reason"></textarea>
+
+      <label>Remarks:</label>
+      <textarea rows="2" placeholder="Optional remarks"></textarea>
+
+      <label>CC To (Email ID):</label>
+      <input type="email" placeholder="example@mail.com" />
+
+      <div class="action-buttons">
+        <button (click)="accept(i)">✅ Accept</button>
+        <button (click)="reject(i)">❌ Reject</button>
+      </div>
+    </div>
+  </div>
+ <!-- Holiday Access Section -->
+  <div class="holiday-access-container">
+    <h2 class="heading">Holiday Access</h2>
+    
+    <div class="calendar-controls">
+      <button (click)="prevMonth()">❮ Previous</button>
+      <h3>{{ currentMonth }} {{ currentYear }}</h3>
+      <button (click)="nextMonth()">Next ❯</button>
+    </div>
+    
+    <div class="calendar-grid">
+      <div class="day-header" *ngFor="let day of dayHeaders">{{ day }}</div>
+      <div *ngFor="let day of calendarDays" 
+           class="calendar-day"
+           [class.empty-day]="!day.date"
+           [class.holiday]="day.isHoliday"
+           [class.approved-holiday]="day.approved"
+           (click)="selectDate(day)">
+        <div *ngIf="day.date">{{ day.date }}</div>
+        <div *ngIf="day.isHoliday" class="holiday-indicator">
+          {{ day.approved ? '✓' : '★' }}
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="selectedDate" class="date-details">
+      <h4>{{ selectedDate.fullDate | date:'fullDate' }}</h4>
+      
+      <div *ngIf="editingHoliday || selectedDate.isHoliday; else noHoliday">
+        <div class="holiday-form">
+          <div class="form-group">
+            <label>Holiday Name:</label>
+            <input *ngIf="editingHoliday" [(ngModel)]="editingHolidayName" placeholder="Enter holiday name">
+            <p *ngIf="!editingHoliday"><strong>Holiday:</strong> {{ selectedDate.holidayName }}</p>
+          </div>
+          
+          <div class="form-group">
+            <label>Reason:</label>
+            <textarea *ngIf="editingHoliday" [(ngModel)]="editingHolidayReason" rows="2" placeholder="Enter reason"></textarea>
+            <p *ngIf="!editingHoliday"><strong>Reason:</strong> {{ selectedDate.holidayReason }}</p>
+          </div>
+          
+          <div *ngIf="selectedDate.isHoliday && !editingHoliday">
+            <p><strong>Status:</strong> {{ selectedDate.approved ? 'Approved' : 'Pending Approval' }}</p>
+          </div>
+        </div>
+        
+        <div class="holiday-actions">
+          <button *ngIf="!editingHoliday && selectedDate.isHoliday && !selectedDate.approved" 
+                  (click)="approveHoliday()">
+            Approve Holiday
+          </button>
+          
+          <button *ngIf="!editingHoliday" (click)="startEditing()">
+            {{ selectedDate.isHoliday ? 'Edit Holiday' : 'Add Holiday' }}
+          </button>
+          
+          <div *ngIf="editingHoliday" class="edit-actions">
+            <button (click)="saveHoliday()">Save</button>
+            <button (click)="cancelEditing()">Cancel</button>
+          </div>
+        </div>
+      </div>
+      
+      <ng-template #noHoliday>
+        <p>No holiday on this date</p>
+        <button (click)="startEditing()">Add Holiday</button>
+      </ng-template>
+    </div>
+  </div>
+</div>

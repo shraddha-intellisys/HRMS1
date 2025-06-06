@@ -1,0 +1,156 @@
+<!-- leaves-approval.component.html -->
+<div class="approval-container">
+  <h2 class="heading">Request for Leave Approval</h2>
+
+  <div *ngFor="let request of leaveRequests; let i = index" class="notification-card">
+    <div class="notification-header" (click)="toggleRequest(i)">
+      <strong>{{ request.empName }}</strong> ({{ request.empId }})
+    </div>
+
+    <div *ngIf="request.expanded" class="request-details">
+      <p><strong>Application Date:</strong> {{ request.applicationDate | date:'dd/MM/yyyy' }}</p>
+      <p><strong>Application Type:</strong> {{ request.applicationType }}</p>
+      <p><strong>Type:</strong> {{ request.leaveType }}</p>
+      <p><strong>Available Leave Balance:</strong> {{ request.leaveBalance }}</p>
+
+      <div class="date-section">
+        <label>From:</label>
+        <div class="date-input-group">
+          <input type="date" [(ngModel)]="request.fromDate" />
+          <select [(ngModel)]="request.fromDateHalf">
+            <option value="First Half">First Half</option>
+            <option value="Second Half">Second Half</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="date-section">
+        <label>To:</label>
+        <div class="date-input-group">
+          <input type="date" [(ngModel)]="request.toDate" />
+          <select [(ngModel)]="request.toDateHalf">
+            <option value="First Half">First Half</option>
+            <option value="Second Half">Second Half</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Reason:</label>
+        <textarea rows="3" [(ngModel)]="request.reason" placeholder="Enter reason for leave"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Remarks:</label>
+        <textarea rows="2" [(ngModel)]="request.remarks" placeholder="Optional remarks"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>CC To (Email ID):</label>
+        <input type="email" [(ngModel)]="request.ccEmail" placeholder="example@mail.com" />
+      </div>
+
+
+       <!-- Approver Dropdown Section -->
+      <div class="approver-section">
+        <label>Approved By:</label>
+        <select [(ngModel)]="request.approvedBy" class="approver-dropdown">
+          <option value="">-- Select Approver --</option>
+          <option value="Rutik Sir">Rutik Sir</option>
+          <option value="Mahesh Sir">Mahesh Sir</option>
+          <option value="Swapnil Sir">Swapnil Sir</option>
+          <option value="Faiz Sir">Faiz Sir</option>
+        </select>
+      </div>
+
+
+      <div class="action-buttons">
+        <button (click)="approveLeave(i)">✅ Approve</button>
+        <button (click)="rejectLeave(i)">❌ Reject</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Add this below the existing leaves-approval component -->
+<div class="history-section">
+  <h2 class="heading">Leave History</h2>
+  
+  <div class="history-tabs">
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'approved'"
+      (click)="activeTab = 'approved'">
+      Approved Leaves
+    </button>
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'rejected'"
+      (click)="activeTab = 'rejected'">
+      Rejected Leaves
+    </button>
+  </div>
+
+  <!-- Approved Leaves Table -->
+  <div *ngIf="activeTab === 'approved'" class="history-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Employee</th>
+          <th>Leave Type</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Days</th>
+          <th>Approved On</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let leave of approvedLeaves">
+          <td>{{ leave.empName }} ({{ leave.empId }})</td>
+          <td>{{ leave.leaveType }}</td>
+          <td>{{ leave.fromDate | date:'dd/MM/yyyy' }} {{ leave.fromDateHalf }}</td>
+          <td>{{ leave.toDate | date:'dd/MM/yyyy' }} {{ leave.toDateHalf }}</td>
+          <td>{{ calculateLeaveDays(leave) }}</td>
+          <td>{{ leave.approvedDate | date:'dd/MM/yyyy' }}</td>
+          <td><span class="status-badge approved">Approved</span></td>
+        </tr>
+        <tr *ngIf="approvedLeaves.length === 0">
+          <td colspan="7" class="no-data">No approved leaves found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Rejected Leaves Table -->
+  <div *ngIf="activeTab === 'rejected'" class="history-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Employee</th>
+          <th>Leave Type</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Days</th>
+          <th>Rejected On</th>
+          <th>Reason</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let leave of rejectedLeaves">
+          <td>{{ leave.empName }} ({{ leave.empId }})</td>
+          <td>{{ leave.leaveType }}</td>
+          <td>{{ leave.fromDate | date:'dd/MM/yyyy' }} {{ leave.fromDateHalf }}</td>
+          <td>{{ leave.toDate | date:'dd/MM/yyyy' }} {{ leave.toDateHalf }}</td>
+          <td>{{ calculateLeaveDays(leave) }}</td>
+          <td>{{ leave.rejectedDate | date:'dd/MM/yyyy' }}</td>
+          <td>{{ leave.rejectionReason || 'Not specified' }}</td>
+        </tr>
+        <tr *ngIf="rejectedLeaves.length === 0">
+          <td colspan="7" class="no-data">No rejected leaves found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

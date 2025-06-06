@@ -27,6 +27,19 @@ export class LoginPageComponent {
 
     const { username, password } = loginForm.value;
 
+    // ✅ Default login fallback (no backend)
+    if (username === 'Shraddha' && password === 'Shraddha123') {
+      localStorage.setItem('token', 'dummy-token');
+      localStorage.setItem('employeeId', 'EMP001');
+      localStorage.setItem('username', username);
+
+      alert("✅ Login successful! Welcome Employee: EMP001");
+
+      this.router.navigate(['/right']);
+      return;
+    }
+
+    // 🔁 Proceed with backend login if not default credentials
     try {
       const response = await fetch('http://localhost:5000/api/auth/login', {
         method: 'POST',
@@ -47,16 +60,10 @@ export class LoginPageComponent {
       localStorage.setItem('token', data.token);
       localStorage.setItem('employeeId', data.employeeId);
       localStorage.setItem('username', data.username);
-      localStorage.setItem('role', data.role); // ✅ Store role
 
-      alert(`✅ Login successful! Welcome ${data.role === 'admin' ? 'Admin' : 'Employee'}: ${data.employeeId}`);
+      alert("✅ Login successful! Welcome Employee: EMP001");
 
-      // ✅ Redirect based on role
-      if (data.role === 'admin') {
-        this.router.navigate(['/admin-dashboard']);
-      } else {
-        this.router.navigate(['/right']); // user panel route
-      }
+      this.router.navigate(['/right']);
     } catch (error: unknown) {
       alert(error instanceof Error ? error.message : '❌ An unexpected error occurred.');
     }
