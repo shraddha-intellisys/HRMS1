@@ -287,3 +287,141 @@ button.mat-raised-button {
     flex-direction: column;
   }
 }
+
+
+
+/* Enhanced Responsive Adjustments */
+@media (max-width: 1200px) {
+  .divleft, .divright {
+    min-width: 250px;
+  }
+  .divcenter {
+    min-width: 400px;
+  }
+}
+
+@media (max-width: 992px) {
+  .calendar-panel {
+    margin: 30px auto;
+    padding: 15px;
+  }
+  
+  :host ::ng-deep .fc-daygrid-day-frame {
+    min-height: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .commondiv {
+    flex-direction: column;
+  }
+  
+  .divleft, .divcenter, .divright {
+    min-width: 100%;
+    width: 100%;
+    flex: 1 1 100%;
+    margin-left: -9%
+  }
+  
+  .calendar-panel {
+    margin: 20px auto;
+    padding: 12px;
+    max-width: 95%;
+  }
+  
+  :host ::ng-deep .fc {
+    font-size: 14px;
+  }
+  
+  :host ::ng-deep .fc-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  :host ::ng-deep .fc-toolbar-chunk {
+    margin-bottom: 8px;
+  }
+  
+  :host ::ng-deep .fc-toolbar-title {
+    font-size: 16px;
+  }
+  
+  .attendance-row {
+    flex-direction: column;
+  }
+  
+  .attendance-box {
+    flex: 1 1 100%;
+  }
+  
+  .summary-cards {
+    flex-direction: column;
+  }
+  
+  .card {
+    min-width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-panel {
+    margin: 15px auto;
+    padding: 10px;
+  }
+  
+  :host ::ng-deep .fc-daygrid-day-frame {
+    min-height: 60px;
+  }
+  
+  :host ::ng-deep .fc-toolbar-title {
+    font-size: 14px;
+  }
+  
+  :host ::ng-deep .fc-button {
+    padding: 0.3em 0.5em;
+    font-size: 0.8em;
+  }
+  
+  .heading {
+    font-size: 1.3em;
+  }
+  
+  .attendance-details {
+    font-size: 14px;
+  }
+  
+  .status-count {
+    font-size: 16px;
+  }
+}
+
+
+
+/* Toolbar: stack vertically on mobile */
+@media (max-width: 600px) {
+  :host ::ng-deep .fc-toolbar {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  :host ::ng-deep .fc-toolbar-chunk {
+    margin-bottom: 6px !important;
+  }
+
+  :host ::ng-deep .fc-toolbar-title {
+    font-size: 16px !important;
+  }
+
+  :host ::ng-deep .fc-button {
+    font-size: 12px !important;
+    padding: 4px 8px !important;
+  }
+
+  .calendar-panel {
+    padding: 10px !important;
+    margin: 10px auto !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+  }
+}

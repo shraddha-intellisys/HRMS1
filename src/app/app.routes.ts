@@ -17,6 +17,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AttendanceApprovalComponent } from './attendance-approval/attendance-approval.component';
 import { LeavesApprovalComponent } from './leaves-approval/leaves-approval.component';
 import { ResignationApprovalComponent } from './resignation-approval/resignation-approval.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 
 export const routes: Routes = [
@@ -37,7 +38,8 @@ export const routes: Routes = [
 { path: 'dashboard', component: DashboardComponent },
 { path: 'attendance-approval', component: AttendanceApprovalComponent},
 { path: 'leaves-approval', component: LeavesApprovalComponent},
-{path : 'resignation-approval', component: ResignationApprovalComponent}
+{path : 'resignation-approval', component: ResignationApprovalComponent},
+{path: 'admin-dashboard', component: AdminDashboardComponent}
 
     ]
  

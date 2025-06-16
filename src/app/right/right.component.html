@@ -1,11 +1,14 @@
 <!-- Top Bar -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 <div class="company-bar">
   <span class="company-name">Intellisys IT Solutions Pvt. Ltd</span>
   <div class="right-content">
     <div class="employee-details">
       <span class="employee-name">{{ username || 'Guest' }}</span>
       <div class="employee-info">
-        <span>Employee <strong>Code:</strong> {{ employeeCode || 'N/A' }}</span>
+        <span><strong>Employee</strong>  <strong>Code:</strong> {{ employeeCode || 'N/A' }}</span>
       </div>
     </div>
     <img
@@ -14,6 +17,9 @@
     alt="{{ employeeName || 'Employee' }}'s photo"
     class="employee-image"
   />
+    <button class="logout-btn" (click)="logout()">
+    <i class="fas fa-sign-out-alt"></i> Logout
+  </button>
   
     <img
       src="assets/notification (1).avif"
@@ -115,7 +121,7 @@
   <!-- To Do List -->
   <div class="content-box">
     <h4>To Do List</h4>
-    <button type="button" class="search-button">+ Add Task</button>
+
   </div>
 
   <!-- New Joinee -->

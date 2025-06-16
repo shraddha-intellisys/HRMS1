@@ -1,0 +1,307 @@
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<div class="company-bar">
+  <span class="company-name">Intellisys IT Solutions Pvt. Ltd - Admin Dashboard</span>
+  <div class="right-content">
+    
+    <div class="employee-details">
+      <span class="employee-name">{{ username || 'Guest' }}</span>
+      <div class="employee-info">
+        <span>Employee <strong>Code:</strong> {{ employeeCode || 'N/A' }}</span>
+      </div>
+    </div>
+   <button class="employee-image-btn" (click)="onProfileClick()">
+  <img
+    [src]="emp.imageUrl || 'assets/employee (1).png'"
+    (error)="emp.imageUrl = undefined"
+    alt="{{ emp.name || 'Employee' }}'s photo"
+    class="employee-image"
+  />
+</button>
+
+<button class="logout-btn" (click)="logout()">
+  <i class="fas fa-sign-out-alt"></i> Logout
+</button>
+
+<!-- ✅ Clickable Notification Icon -->
+<button class="notification-btn" (click)="onNotificationClick()">
+  <img
+    src="assets/notification (1).avif"
+    alt="Notification"
+    class="notification-icon"
+  />
+</button>
+  </div>
+</div>
+
+<!-- Welcome Section -->
+<div class="right-side">
+  <div class="welcome-section">
+    <div class="makeflex">
+      <div class="employee-info">
+        <img
+          [src]="emp.imageUrl ? emp.imageUrl : 'assets/employee (1).png'"
+          alt="{{ emp.name || 'Employee' }}'s photo"
+          class="employee-image"
+        />
+        <h1>
+          <span *ngIf="!editingWelcome">Welcome, Ms. {{ username || 'Shraddha' }}</span>
+          <input *ngIf="editingWelcome" [(ngModel)]="username" class="edit-input">
+        </h1>
+      </div>
+    
+      <div class="welcome-message">
+        <span *ngIf="!editingWelcome">Hope you have a great day at work!</span>
+        <input *ngIf="editingWelcome" [(ngModel)]="welcomeMessage" class="edit-input">
+      </div>
+    </div>
+    <div class="officelogo">
+      <img *ngIf="!editingWelcome" src="assets/logo (2).png" alt="Office Logo" />
+      <input *ngIf="editingWelcome" type="file" (change)="onLogoChange($event)" accept="image/*">
+      <button class="edit-btn" (click)="toggleEdit('welcome')">
+        {{ editingWelcome ? 'Save' : 'Edit' }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content Area -->
+<div class="content-section">
+
+  <!-- Current Time & Date -->
+  <div class="content1-box">
+    <h4>Current Time & Date</h4>
+    <p>{{ currentTime || '--:--:--' }}</p>
+    <p>{{ currentDate || 'Loading date...' }}</p>
+  </div>
+
+  <!-- News Center -->
+  <div class="content-box">
+  <div class="section-header">
+    <h4>News Center</h4>
+    <button class="edit-btn" (click)="toggleEdit('news')">
+      {{ editingNews ? 'Save' : 'Edit' }}
+    </button>
+  </div>
+  <div *ngIf="!editingNews">
+    <p *ngIf="newsItems.length === 0">No records to display</p>
+    <ul *ngIf="newsItems.length > 0">
+      <li *ngFor="let item of newsItems; let i = index">
+        {{ item }}
+        <button class="delete-btn" (click)="deleteNewsItem(i)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="editingNews">
+    <textarea [(ngModel)]="newsText" class="edit-textarea"></textarea>
+    <button class="add-btn" (click)="addNewsItem()">Add News</button>
+  </div>
+</div>
+
+
+
+
+  <!-- Upcoming Birthdays Section -->
+ <div class="content-remind">
+    <div class="section-header1">
+      <h4>Upcoming Reminders</h4>
+      <button class="edit-btn" (click)="toggleEdit('reminders')">
+        {{ editingReminders ? 'Save' : 'Edit' }}
+      </button>
+    </div>
+
+    <div *ngIf="!editingReminders">
+      <p *ngIf="reminders.length === 0 && upcomingBirthdays.length === 0">No upcoming reminders</p>
+
+      <div *ngFor="let reminder of reminders" class="reminder-row">
+        <div class="reminder-icon">
+          <i class="fas fa-bell"></i>
+        </div>
+        <div class="reminder-details">
+          <h5>{{ reminder.title }}</h5>
+          <p><strong>Date:</strong> {{ reminder.date | date:'mediumDate' }}</p>
+          <p><strong>Type:</strong> {{ reminder.type || 'General' }}</p>
+          <p *ngIf="reminder.notes"><strong>Notes:</strong> {{ reminder.notes }}</p>
+        </div>
+      </div>
+
+      <div *ngFor="let emp of upcomingBirthdays" class="reminder-row birthday-reminder">
+        <div class="reminder-icon">
+          <i class="fas fa-birthday-cake"></i>
+        </div>
+        <div class="employee-details">
+          <h5>🎉 {{ emp.name }}'s Birthday</h5>
+          <p><strong>Date:</strong> {{ emp.dateOfBirth | date:'MMM d' }}</p>
+          <p><strong>Department:</strong> {{ emp.department }}</p>
+          <p><strong>Email:</strong> {{ emp.email }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="editingReminders" class="edit-reminders">
+      <button class="add-btn" (click)="addReminder()">
+        <i class="fas fa-plus"></i> Add Reminder
+      </button>
+
+      <div *ngFor="let reminder of reminders; let i = index" class="editable-reminder">
+        <div class="form-group">
+          <label>Title</label>
+          <input [(ngModel)]="reminder.title" class="form-control" placeholder="Reminder title">
+        </div>
+        
+        <div class="form-group">
+          <label>Date</label>
+          <input [(ngModel)]="reminder.date" type="date" class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label>Type</label>
+          <select [(ngModel)]="reminder.type" class="form-control">
+            <option value="General">General</option>
+            <option value="Meeting">Meeting</option>
+            <option value="Birthday">Birthday</option>
+            <option value="Anniversary">Anniversary</option>
+            <option value="Deadline">Deadline</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>Notes</label>
+          <textarea [(ngModel)]="reminder.notes" class="form-control" placeholder="Additional notes"></textarea>
+        </div>
+        
+        <button class="delete-btn" (click)="removeReminder(i)">
+          <i class="fas fa-trash"></i> Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feed -->
+<div class="content-feed">
+  <div class="section-header">
+    <h4>Feed</h4>
+    <button class="edit-btn" (click)="toggleEdit('feed')">
+      {{ editingFeed ? 'Save' : 'Edit' }}
+    </button>
+  </div>
+  <div *ngIf="!editingFeed">
+    <p *ngIf="feedItems.length === 0">No new updates</p>
+    <div *ngIf="feedItems.length > 0" class="feed-items">
+      <div *ngFor="let item of feedItems; let i = index" class="feed-item">
+        {{ item }}
+        <button class="delete-btn" (click)="deleteFeedItem(i)">Delete</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="editingFeed" class="edit-feed">
+    <textarea [(ngModel)]="feedText" placeholder="Enter feed update"></textarea>
+    <button class="add-btn" (click)="addFeedItem()">Post Update</button>
+  </div>
+</div>
+  <!-- Employee Documents -->
+  <div class="content-doc">
+    <div class="section-header">
+      <h4>Employee Documents</h4>
+      <button class="edit-btn" (click)="toggleEdit('empDocuments')">
+        {{ editingEmpDocuments ? 'Save' : 'Edit' }}
+      </button>
+    </div>
+    <div class="search-container">
+      <input type="text" placeholder="Search for documents..." class="search-bar" [(ngModel)]="empDocumentSearch" />
+      <button type="button" class="search-button">Search</button>
+    </div>
+    <div *ngIf="editingEmpDocuments" class="document-upload">
+      <input type="file" (change)="onEmpDocumentUpload($event)" multiple>
+      <button class="add-btn" (click)="uploadEmpDocuments()">Upload</button>
+    </div>
+    <div class="document-list">
+      <div *ngFor="let doc of filteredEmpDocuments" class="document-item">
+        {{ doc.name }}
+        <span *ngIf="editingEmpDocuments" class="delete-doc" (click)="deleteEmpDocument(doc)">×</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- To Do List -->
+  <div class="content-box">
+    <div class="section-header">
+      <h4>To Do List</h4>
+      <button class="edit-btn" (click)="toggleEdit('todo')">
+        {{ editingTodo ? 'Save' : 'Edit' }}
+      </button>
+    </div>
+    <button type="button" class="search-button" (click)="addTodoItem()">+ Add Task</button>
+    <div *ngIf="editingTodo" class="todo-edit">
+      <div *ngFor="let item of todoItems; let i = index" class="todo-item">
+        <input type="checkbox" [(ngModel)]="item.completed">
+        <input [(ngModel)]="item.task" class="todo-input">
+        <button class="delete-btn" (click)="removeTodoItem(i)">Delete</button>
+      </div>
+    </div>
+    <div *ngIf="!editingTodo" class="todo-list">
+      <div *ngFor="let item of todoItems" class="todo-item-display">
+        <span [class.completed]="item.completed">{{ item.task }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Joinee -->
+  <div class="content-joinee">
+    <div class="section-header">
+      <h4>New Joinee</h4>
+      <button class="edit-btn" (click)="toggleEdit('joinee')">
+        {{ editingJoinee ? 'Save' : 'Edit' }}
+      </button>
+    </div>
+    <div *ngIf="!editingJoinee">
+      <div *ngFor="let joinee of newJoinees" class="joinee-item">
+        <img [src]="joinee.imageUrl || 'assets/employee (1).png'" class="joinee-image">
+        <div class="joinee-details">
+          <p>{{ joinee.name }}</p>
+          <p>Joined: {{ joinee.joinDate | date }}</p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="editingJoinee" class="edit-joinee">
+      <div *ngFor="let joinee of newJoinees; let i = index" class="editable-joinee">
+        <input [(ngModel)]="joinee.name" placeholder="Name">
+        <input [(ngModel)]="joinee.joinDate" type="date" placeholder="Join Date">
+        <input type="file" (change)="onJoineeImageChange($event, i)">
+        <button class="delete-btn" (click)="removeJoinee(i)">Remove</button>
+      </div>
+      <button class="add-btn" (click)="addJoinee()">Add New Joinee</button>
+    </div>
+  </div>
+
+  <!-- Stat Cards -->
+  <div class="stat-cards">
+    <div class="card blue">Employees <span>{{ stats.employees }}</span></div>
+    <div class="card green">Present <span>{{ stats.present }}</span></div>
+    <div class="card orange">On Leave <span>{{ stats.onLeave }}</span></div>
+    <div class="card purple">Departments <span>{{ stats.departments }}</span></div>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="charts">
+    <div class="chart-card">
+      <h4>Employee Distribution</h4>
+      <canvas baseChart
+              [data]="employeeDistributionData"
+              [labels]="employeeDistribution.labels"
+              [type]="'pie'">
+      </canvas>
+    </div>
+
+    <div class="chart-card">
+      <h4>Attendance Overview</h4>
+      <canvas baseChart
+              [data]="attendanceOverview"
+              [type]="'line'">
+      </canvas>
+    </div>
+  </div>
+
+ 
+</div>
+

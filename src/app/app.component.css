@@ -45,7 +45,7 @@
   background-color: #ffffff; /* Example background color */
   height: 100vh; /* Full height */
   padding: 20px; /* Optional padding for content */
-  overflow-y: auto; /* Enable scrolling if content overflows */
+  
 }
 
 /* Mobile layout adjustments */

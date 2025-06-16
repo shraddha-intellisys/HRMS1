@@ -1,53 +1,88 @@
+
+
 .resignation-wrapper {
-  margin: 20px;
+  max-width: 600px;
+  margin: 30px auto;
   padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.resignation-wrapper h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 25px;
 }
 
 .resignation-form {
   background-color: #f8f9fa;
-  padding: 20px;
+  padding: 25px;
   border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-label {
+.resignation-form label {
   font-weight: 500;
   display: block;
   margin-top: 15px;
+  color: #555;
 }
 
-input, textarea {
+.resignation-form input,
+.resignation-form textarea {
   width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 8px;
+  border: 1px solid #ddd;
   border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
 }
 
-button {
-  margin-top: 20px;
-  padding: 10px 15px;
+.resignation-form input:focus,
+.resignation-form textarea:focus {
+  outline: none;
+  border-color: #ff8c00;
+  box-shadow: 0 0 0 2px rgba(255, 140, 0, 0.1);
+}
+
+.resignation-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.submit-btn {
+  padding: 10px 20px;
   background-color: #ff8c00;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
 }
 
-.resignation-form {
-  margin-top: 20px;
-  padding: 20px;
-  border-radius: 8px;
-  background: #f9f9f9;
-  box-shadow: 0 0 10px #ccc;
+.submit-btn:hover {
+  background-color: #e67e00;
 }
 
-label {
-  font-weight: bold;
+.cancel-btn {
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  color: #555;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s;
 }
 
-input, textarea {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 8px;
+.cancel-btn:hover {
+  background-color: #e0e0e0;
 }

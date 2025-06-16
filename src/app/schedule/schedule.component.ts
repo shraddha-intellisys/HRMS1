@@ -1,4 +1,4 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser, NgIf } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,6 +15,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import moment from 'moment';
 import { HttpClient } from '@angular/common/http';
+import { LoginPageComponent } from '../login-page/login-page.component';
 
 @Component({
   selector: 'app-schedule',
@@ -306,11 +307,6 @@ this.durationTime = moment.utc(
   }
 
 
-
-
-
-
-
   renderEventContent(arg: EventContentArg): { html: string } {
     try {
       const data = JSON.parse(arg.event.title);
@@ -332,10 +328,6 @@ this.durationTime = moment.utc(
     }
   }
 
-
-
-
-
   onDateClick(info: any): void {
     const clickedDate = info.dateStr;
     console.log('📅 Date clicked:', clickedDate);
@@ -354,3 +346,4 @@ this.durationTime = moment.utc(
     }
   }
 }
+

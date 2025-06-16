@@ -8,31 +8,41 @@
     </div>
 
     <div *ngIf="request.expanded" class="request-details">
-      <p><strong>Application Date:</strong> 04/06/2025</p>
-      <p><strong>Application Type:</strong> Manual Attendance</p>
-      <p><strong>Type:</strong> Full Day</p>
-      <p><strong>Available Leave Balance:</strong> 25</p>
-
+      <p><strong>Application Date:</strong> {{ request.applicationDate || '04/06/2025' }}</p>
+      <p><strong>Application Type:</strong> {{ request.applicationType || 'Manual Attendance' }}</p>
+      <p><strong>Type:</strong> {{ request.type || 'Full Day' }}</p>
+     
       <div class="date-section">
         <label>From:</label>
-        <input type="date" />
-        <select>
-          <option>First Half</option>
-          <option>Second Half</option>
+        <input type="date" [value]="request.fromDate" readonly />
+        <select disabled>
+          <option [selected]="request.fromHalf === 'First Half'">First Half</option>
+          <option [selected]="request.fromHalf === 'Second Half'">Second Half</option>
         </select>
       </div>
+
+      <div class="time-section">
+        <label>From Time:</label>
+        <input type="time" [value]="request.fromTime || '--:--'" readonly />
+      </div>
+
 
       <div class="date-section">
         <label>To:</label>
-        <input type="date" />
-        <select>
-          <option>First Half</option>
-          <option>Second Half</option>
+        <input type="date" [value]="request.toDate" readonly />
+        <select disabled>
+          <option [selected]="request.toHalf === 'First Half'">First Half</option>
+          <option [selected]="request.toHalf === 'Second Half'">Second Half</option>
         </select>
       </div>
 
+      <div class="time-section">
+        <label>To Time:</label>
+        <input type="time" [value]="request.toTime || '--:--'" readonly />
+      </div>
+
       <label>Reason:</label>
-      <textarea rows="2" placeholder="Enter reason"></textarea>
+      <textarea rows="2" readonly>{{ request.reason || 'Enter reason' }}</textarea>
 
       <label>Remarks:</label>
       <textarea rows="2" placeholder="Optional remarks"></textarea>
@@ -46,7 +56,8 @@
       </div>
     </div>
   </div>
- <!-- Holiday Access Section -->
+
+  <!-- Holiday Access Section -->
   <div class="holiday-access-container">
     <h2 class="heading">Holiday Access</h2>
     

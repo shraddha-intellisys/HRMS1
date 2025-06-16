@@ -1,6 +1,39 @@
 import { Component } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
+interface AttendanceRequest {
+  empName: string;
+  empId: string;
+  expanded: boolean;
+  applicationDate?: string;
+  applicationType?: string;
+  type?: string;
+  fromDate?: string;
+   fromTime?: string;
+  toDate?: string;
+  toTime?: string;
+  fromHalf?: string;
+  toHalf?: string;
+  reason?: string;
+}
+
+interface CalendarDay {
+  date?: number;
+  fullDate?: Date;
+  isHoliday?: boolean;
+  holidayName?: string;
+  holidayReason?: string;
+  approved?: boolean;
+}
+
+interface Holiday {
+  date: Date;
+  name: string;
+  reason: string;
+  approved: boolean;
+}
+
 @Component({
   selector: 'app-attendance-approval',
   standalone: true,
@@ -9,23 +42,45 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./attendance-approval.component.css']
 })
 export class AttendanceApprovalComponent {
-  requests = [
-    { empName: 'ABC', empId: 'EMP001', expanded: false },
-    { empName: 'XYZ', empId: 'EMP002', expanded: false }
+  requests: AttendanceRequest[] = [
+    { 
+      empName: 'ABC', 
+      empId: 'EMP001', 
+      expanded: false,
+      applicationDate: '04/06/2025',
+      applicationType: 'Manual Attendance',
+      type: 'Full Day',
+      fromDate: '2025-06-04',
+      toDate: '2025-06-04',
+      fromHalf: 'First Half',
+      toHalf: 'Second Half',
+      reason: 'System issue prevented clock-in'
+    },
+    { 
+      empName: 'XYZ', 
+      empId: 'EMP002', 
+      expanded: false,
+      applicationDate: '05/06/2025',
+      applicationType: 'Manual Attendance',
+      type: 'Half Day',
+      fromDate: '2025-06-05',
+      toDate: '2025-06-05',
+      fromHalf: 'First Half',
+      reason: 'Doctor appointment'
+    }
   ];
 
   dayHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   currentDate = new Date();
   currentMonth = this.currentDate.toLocaleString('default', { month: 'long' });
   currentYear = this.currentDate.getFullYear();
-  calendarDays: any[] = [];
-  selectedDate: any = null;
-   editingHoliday = false;
+  calendarDays: CalendarDay[] = [];
+  selectedDate: CalendarDay | null = null;
+  editingHoliday = false;
   editingHolidayName = '';
   editingHolidayReason = '';
 
-
-  holidays = [
+  holidays: Holiday[] = [
     { date: new Date('2025-06-15'), name: 'Father\'s Day', reason: 'Celebration of fatherhood', approved: false },
     { date: new Date('2025-07-04'), name: 'Independence Day', reason: 'National holiday', approved: true }
   ];
@@ -40,10 +95,12 @@ export class AttendanceApprovalComponent {
 
   accept(index: number) {
     console.log('Accepted request:', this.requests[index]);
+    // Add your acceptance logic here
   }
 
   reject(index: number) {
     console.log('Rejected request:', this.requests[index]);
+    // Add your rejection logic here
   }
 
   generateCalendar() {
@@ -97,29 +154,28 @@ export class AttendanceApprovalComponent {
     this.currentYear = this.currentDate.getFullYear();
   }
 
-  selectDate(day: any) {
+  selectDate(day: CalendarDay) {
     if (day.date) {
       this.selectedDate = day;
     }
   }
 
-  
   startEditing() {
     this.editingHoliday = true;
-    this.editingHolidayName = this.selectedDate.holidayName || '';
-    this.editingHolidayReason = this.selectedDate.holidayReason || '';
+    this.editingHolidayName = this.selectedDate?.holidayName || '';
+    this.editingHolidayReason = this.selectedDate?.holidayReason || '';
   }
 
   saveHoliday() {
-    if (this.editingHolidayName.trim()) {
+    if (this.editingHolidayName.trim() && this.selectedDate) {
       const holidayIndex = this.holidays.findIndex(h => 
-        h.date.getDate() === this.selectedDate.fullDate.getDate() &&
-        h.date.getMonth() === this.selectedDate.fullDate.getMonth() &&
-        h.date.getFullYear() === this.selectedDate.fullDate.getFullYear()
+        h.date.getDate() === this.selectedDate?.fullDate?.getDate() &&
+        h.date.getMonth() === this.selectedDate?.fullDate?.getMonth() &&
+        h.date.getFullYear() === this.selectedDate?.fullDate?.getFullYear()
       );
 
-      const newHoliday = {
-        date: new Date(this.selectedDate.fullDate),
+      const newHoliday: Holiday = {
+        date: new Date(this.selectedDate.fullDate!),
         name: this.editingHolidayName,
         reason: this.editingHolidayReason,
         approved: holidayIndex >= 0 ? this.holidays[holidayIndex].approved : false
@@ -134,9 +190,9 @@ export class AttendanceApprovalComponent {
       this.generateCalendar();
       this.editingHoliday = false;
       this.selectDate(this.calendarDays.find(d => 
-        d.date === this.selectedDate.date && 
-        d.fullDate.getMonth() === this.selectedDate.fullDate.getMonth()
-      ));
+        d.date === this.selectedDate?.date && 
+        d.fullDate?.getMonth() === this.selectedDate?.fullDate?.getMonth()
+      )!);
     }
   }
 
@@ -145,10 +201,12 @@ export class AttendanceApprovalComponent {
   }
 
   approveHoliday() {
+    if (!this.selectedDate) return;
+    
     const holidayIndex = this.holidays.findIndex(h => 
-      h.date.getDate() === this.selectedDate.fullDate.getDate() &&
-      h.date.getMonth() === this.selectedDate.fullDate.getMonth() &&
-      h.date.getFullYear() === this.selectedDate.fullDate.getFullYear()
+      h.date.getDate() === this.selectedDate?.fullDate?.getDate() &&
+      h.date.getMonth() === this.selectedDate?.fullDate?.getMonth() &&
+      h.date.getFullYear() === this.selectedDate?.fullDate?.getFullYear()
     );
     
     if (holidayIndex >= 0) {
@@ -160,11 +218,13 @@ export class AttendanceApprovalComponent {
   }
 
   addHoliday() {
+    if (!this.selectedDate) return;
+    
     const holidayName = prompt('Enter holiday name:');
     if (holidayName) {
       const holidayReason = prompt('Enter holiday reason:');
-      const newHoliday = {
-        date: new Date(this.selectedDate.fullDate),
+      const newHoliday: Holiday = {
+        date: new Date(this.selectedDate.fullDate!),
         name: holidayName,
         reason: holidayReason || '',
         approved: false

@@ -31,6 +31,7 @@ export class ResignationApprovalComponent {
 
   // Resignation history section
   activeTab: 'approved' | 'rejected' = 'approved';
+
   
   approvedResignations = [
     {

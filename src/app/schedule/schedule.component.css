@@ -117,24 +117,7 @@
   .attendance-box.leave-submit {
   border-left: 4px solid #fd7e14;
   }
-  .attendance-box.attendance-submit {
-  border-left: 4px solid #20c997;
-  }
-  .attendance-box.phy {
-  border-left: 4px solid #6c757d;
-  }
-  .attendance-box.weo {
-  border-left: 4px solid #6f42c1;
-  }
-  .attendance-box.reminders {
-  border-left: 4px solid #007bff;
-  }
-  .attendance-box.half-day {
-  border-left: 4px solid #6610f2;
-  }
-  .attendance-box.blocked {
-  border-left: 4px solid #343a40;
-  }
+ 
 
   :root {
   --primary-orange: #FF8C00;
@@ -312,4 +295,96 @@ input[matInput] {
   font-size: 22px;
   text-shadow: 1px 1px 4px rgba(255, 140, 0, 0.5);
 }
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+  .divleft, .divright {
+    flex: 0 0 30%;
+    max-width: 30%;
+  }
+  .divcenter {
+    flex: 0 0 40%;
+    max-width: 40%;
+  }
+}
+
+@media (max-width: 992px) {
+  .commondiv {
+    flex-wrap: wrap;
+  }
+  .divleft, .divcenter, .divright {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .commondiv {
+    padding: 15px;
+    gap: 15px;
+  }
+  .divleft, .divcenter, .divright {
+    padding: 15px;
+  }
+  .attendance-box {
+    flex: 1 1 100%;
+  }
+  button {
+    width: 100%;
+    margin: 5px 0;
+  }
+  .buttons button {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .commondiv {
+    padding: 10px;
+    gap: 10px;
+  }
+  .divleft, .divcenter, .divright {
+    padding: 12px;
+  }
+  h2 {
+    font-size: 1.3rem;
+  }
+  h3, h4 {
+    font-size: 1.1rem;
+  }
+  .heading h4 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+  .status-count {
+    font-size: 14px;
+  }
+  .attendance-details {
+    font-size: 14px;
+  }
+}
+
+/* Attendance container responsive adjustments */
+@media (max-width: 992px) {
+  .attendance-row {
+    flex-wrap: wrap;
+  }
+  .attendance-box {
+    flex: 1 1 calc(50% - 10px);
+  }
+}
+
+@media (max-width: 576px) {
+  .attendance-box {
+    flex: 1 1 100%;
+  }
+
+  .fc-view-harness fc-view-harness-active
+  {
+    width: 1500%;
+  }
+}
+
 

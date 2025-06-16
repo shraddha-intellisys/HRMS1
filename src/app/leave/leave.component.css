@@ -1,10 +1,12 @@
 .leave-container {
+  width: 100%;
     display: flex;
     flex-direction: column; 
-    align-items: flex-start;
+    /* align-items: flex-start; */
     padding: 5px;
     color: #000000;
     font-family: Arial, sans-serif;
+    
   }
   
   
@@ -12,25 +14,31 @@
     background-color: rgb(246, 130, 42);
     padding: 5px;
     border-radius: 3px;
-    width: 100%;
-    margin-bottom: 10px; /* Adds space between header and main section */
+    
+    margin-bottom: 15px; /* Adds space between header and main section */
   }
   
   .main-section {
     display: flex;
-    width: 99%; 
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%; 
+    /* margin: auto; */
   }
   
   .left-section,
   .right-section {
-    width: 98%; /* Ensures both sections are side by side */
+    width:50%; /* Ensures both sections are side by side */
+        gap: 15px; 
+        display: flex;
+    flex-direction: column;
+
   }
   
   .left-section {
-    height: 00px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px; 
+    /* height: 00px; */
+    
+   
     margin-left: 2%;
   }
   
@@ -39,9 +47,7 @@
     color: #171515;
   }
   
-  .right-section {
-    width: 100%; /* Ensure the section takes full width */
-  }
+  
   
   .date-range-inline {
     display: flex;
@@ -141,6 +147,7 @@
     padding: 6px; 
   }
   
+  
   .details-table th {
     background-color:darkorange;
   }
@@ -182,6 +189,15 @@
     gap: 15px; /* Adds space between buttons */
     margin-top: 5px; /* Adds space above buttons */
   }
+  .buttons-container2
+  {
+     
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 15px; /* Adds space between buttons */
+    margin-top: 5px; /* Adds space above buttons */
+    display:none
+  }
   
   
   button {
@@ -215,4 +231,95 @@
   button i {
   font-size: 16px; 
   }
+
+
+@media screen and (min-width: 600px) and (max-width: 1024px) {
+  .leave-container
+  {
+  margin-top: 10%;
+}
+}
+
+@media screen  and (max-width: 600px) {
+  .leave-container
+  {
+  margin-top: 10%;
+}
+   .buttons-container
+   {
+    margin-top: 50%;
+   }
+}
+
+@media screen and (max-width: 600px) {
+  .leave-container {
+    margin-top: 15%;
+    padding: 10px;
+  }
+
+  .main-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .left-section,
+  .right-section {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .form-group,
+  .form-group1 {
+    width: 100%;
+  }
+
+  .form-control,
+  .custom-date-input,
+  .line-input,
+  .select-no-box {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .checkbox-group {
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .buttons-container {
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  button {
+    width: 100%;
+    justify-content: center;
+  }
+
   
+
+  .add-leave-header h2 {
+    font-size: 20px;
+    margin-top: 0;
+    text-align: center;
+  }
+
+  .add-leave-header p.name {
+    font-size: 14px;
+    text-align: center;
+  }
+}
+
+/* Hide mobile buttons on desktop */
+@media screen and (max-width: 601px) {
+  .buttons-container
+  {
+    display: none;
+  }
+  .buttons-container2
+  {
+    display: flex;
+  }
+}

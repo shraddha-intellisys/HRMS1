@@ -163,6 +163,10 @@ export class RightComponent implements OnInit {
       }
     });
   }
+  logout(): void {
+  this.authService.logout();
+  this.router.navigate(['/login']);
+}
 
   private filterUpcomingBirthdays(employees: any[]): any[] {
     const today = new Date();

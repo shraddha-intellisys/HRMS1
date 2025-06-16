@@ -60,32 +60,5 @@
   </div>
 </div>
 
-<!-- Pending Leave Requests -->
-<div class="employee-table" style="margin-top: 40px;">
-  <h4>Leave Requests</h4>
-  <table>
-    <thead>
-      <tr>
-        <th>Employee</th>
-        <th>From</th>
-        <th>To</th>
-        <th>Reason</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let leave of pendingLeaves">
-        <td>{{ leave.employeeName }}</td>
-        <td>{{ leave.fromDate | date }}</td>
-        <td>{{ leave.toDate | date }}</td>
-        <td>{{ leave.reason }}</td>
-        <td>{{ leave.status }}</td>
-        <td>
-          <button mat-button color="primary" (click)="approveLeave(leave._id)">Approve</button>
-          <button mat-button color="warn" (click)="rejectLeave(leave._id)">Reject</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+
 
